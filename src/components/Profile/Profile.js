@@ -15,7 +15,6 @@ class Profile extends Component {
   	}
 
 	render() {
-		console.log(this.props.user)
 		return (
 				<div className="page-wrapper">
 					<h1>{this.props.user.data.user.username}</h1>

@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { logout } from '../../actions/auth'
+import { logout, getUserData } from '../../actions/auth'
 import './NavBar.css'
 
 class NavBar extends Component {
 
 	loggedIn = () => {
 		return !!localStorage.getItem("jwt")
+	}
+
+	componentWillMount = () => {
+		if (this.loggedIn()) {
+			this.props.getUserData(localStorage.getItem('jwt'))
+		}
 	}
 
 	handleLogout = (e) => {
@@ -53,6 +59,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     logout: () => {
       dispatch(logout())
+    },
+    getUserData: (jwt) => {
+      dispatch(getUserData(jwt))
     }
   }
 }

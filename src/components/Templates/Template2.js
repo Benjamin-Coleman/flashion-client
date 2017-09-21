@@ -31,14 +31,14 @@ class Template2 extends Component {
 				//////////
 
 				<div className={index === this.state.currentIndex ? "template-2-product-wrapper active" : "template-2-product-wrapper"} key={index}>
-					{product.URL !== '' ? <a href={product.URL}>
+					
 					<img src={product.imageURL} alt={product.name}/>
 					<div className="template-2-product-info">
 						<h3>{product.name}</h3>
 						<p>{product.description}</p>
+						{product.URL !== '' ? <a href={product.URL} className="primary-button template-2"><span>View On Site</span></a> : null}
 					</div>
-					</a>
-					: null}
+					
 				</div>
 				))
 		return (

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { fetchLookbook } from '../../actions/templates' 
-import './Lookbook.js'
+import './Lookbook.css'
 import Template1 from '../Templates/Template1'
 import Template2 from '../Templates/Template2'
 
