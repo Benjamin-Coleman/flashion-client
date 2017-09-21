@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { fetchLookbook } from '../../actions/templates' 
+import './Lookbook.js'
 import Template1 from '../Templates/Template1'
+import Template2 from '../Templates/Template2'
 
 class Lookbook extends Component {
 
@@ -23,8 +25,8 @@ class Lookbook extends Component {
 		switch(this.props.data.templateId){
 		case 1:
 			return <Template1 />
-		case "2":
-			return <div><h1>hello from temp 2</h1></div>
+		case 2:
+			return <Template2 />
 		default:
 			return <div>Something went wrong</div>
 		}

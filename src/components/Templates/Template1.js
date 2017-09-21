@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './Template1.css'
 import PreviewBar from '../PreviewBar/PreviewBar'
 import { fetchLookbook } from '../../actions/templates'
+import { Route } from 'react-router-dom'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -23,7 +24,7 @@ class Template1 extends Component {
 				))
 		return (
 			<div>
-				<PreviewBar />
+				<Route path='/lookbooks/preview' render={(props) => <PreviewBar {...props}/>}/>
 				<div className="template-1-header">
 					<h1>{this.props.data.userInput.brandName}</h1>
 					<h6>{this.props.data.userInput.collectionName}</h6>

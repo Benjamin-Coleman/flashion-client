@@ -1,8 +1,21 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { logout } from '../../actions/auth'
 import './NavBar.css'
 
 class NavBar extends Component {
+
+	loggedIn = () => {
+		return !!localStorage.getItem("jwt")
+	}
+
+	handleLogout = (e) => {
+		e.preventDefault()
+		this.props.logout()
+		this.props.history.push('/')
+	}
+
 	render() {
 		return (
 			<div className='navbar'>
@@ -13,11 +26,35 @@ class NavBar extends Component {
 				</div>
 				<div className='nav-links'>
 					<NavLink to='/about' activeClassName="selected">About</NavLink>
-					<NavLink to='/login' activeClassName="selected">Login</NavLink>
+					<NavLink to='/templates' activeClassName="selected">Templates</NavLink>
+					{ this.loggedIn() ? 
+						<NavLink to='/profile' activeClassName="selected">Profile</NavLink> 
+						: 
+						<NavLink to='/login' activeClassName="selected">Login</NavLink>
+					}
+					{ this.loggedIn() ? 
+						<NavLink to='/' activeClassName="selected" onClick={this.handleLogout}>Logout</NavLink> 
+						:
+						<NavLink to='/signup' activeClassName="selected">Signup</NavLink>
+					}
 				</div>
 			</div>
 			)
 	}
 }
 
-export default NavBar
+const mapStateToProps = (state) => {
+  return {
+    user: state.auth
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: () => {
+      dispatch(logout())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar)

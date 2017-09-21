@@ -7,8 +7,9 @@ import { saveCreateData } from '../../actions/templates'
 class PreviewBar extends Component {
 
 	handlePublishLookbook = () => {
-		this.props.saveCreateData(this.props.data)
+		this.props.saveCreateData(this.props.data, this.props.currentUserId).then(() => this.props.history.push(`/lookbooks/${this.props.data.saveResponse.lookbookId}`))
 		console.log(this.props)
+		// this.props.history.push(`/lookbooks/${this.props.data.saveResponse.lookbookId}`)
 	}
 
 	render() {
@@ -22,7 +23,8 @@ class PreviewBar extends Component {
 }
 
 const mapStateToProps = state => ({
-	data: state.templates
+	data: state.templates,
+	currentUserId: state.auth.data.user.id
 })
 
 const mapDispatchToProps = dispatch => ({

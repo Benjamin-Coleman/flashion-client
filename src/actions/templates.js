@@ -16,7 +16,6 @@ export function fetchLookbook(lookbookId){
 		fetch(url, options)
 			.then((res) => res.json())
 			.then((json) => {
-				console.log(json)
 				dispatch({ type:"FETCH_LOOKBOOK", payload: json})
 			})
 	}
@@ -29,16 +28,16 @@ export const collectCreateData = (data) => {
 	}
 }
 
-export function saveCreateData(data) {
+export function saveCreateData(data, user_id) {
 	console.log(data)
 	return function(dispatch) {
 		const url = `http://localhost:3000/api/v1/lookbooks/new`
 		const options = {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({user_id: 1, template_id: data.data.templateId, brand_name: data.data.userInput.brandName, collection_name: data.data.userInput.collectionName, products: data.data.userInput.products})
+			body: JSON.stringify({user_id: user_id, template_id: data.data.templateId, brand_name: data.data.userInput.brandName, collection_name: data.data.userInput.collectionName, products: data.data.userInput.products})
 		}
-		fetch(url, options)
+		return fetch(url, options)
 			.then((res) => res.json())
 			.then((json) => {
 				dispatch({ type:"SAVE_CREATE_DATA", payload: json })
