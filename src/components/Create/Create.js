@@ -6,7 +6,7 @@ import { collectCreateData } from '../../actions/templates'
 class Create extends Component {
 
 	state = {
-		templateId: this.props.match.params.id,
+		templateId: parseInt(this.props.match.params.id),
 		userInput: {
 			brandName: '',
 			collectionName: '',
@@ -26,7 +26,7 @@ class Create extends Component {
 		console.log(this.props)
 		const sanitizedBrandName = this.state.userInput.brandName.split(' ').join('-').toLowerCase()
 		const sanitizedCollectionName = this.state.userInput.collectionName.split(' ').join('-').toLowerCase()
-		this.props.history.push(`/lookbooks/${sanitizedBrandName}/${sanitizedCollectionName}`)
+		this.props.history.push(`/lookbooks/preview/${sanitizedBrandName}/${sanitizedCollectionName}`)
 		this.props.collectCreateData({...this.state})
 	}
 
@@ -89,6 +89,7 @@ class Create extends Component {
 	handleAddProduct = () => {
 		this.setState({
 			...this.state, userInput: {
+				...this.state.userInput,
 			products: this.state.userInput.products.concat([{ imageURL: '',
 					description: '',
 					name: ''}])
@@ -98,7 +99,10 @@ class Create extends Component {
 
 	handleRemoveProduct = (idx) => {
 		this.setState({
+			...this.state, userInput: {
+				...this.state.userInput,
 			products: this.state.products.filter((s, sidx) => idx !== sidx)
+		}
 		})
 	}
 

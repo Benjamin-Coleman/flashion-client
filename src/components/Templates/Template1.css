@@ -3,6 +3,7 @@
 	padding-left: 3em;
 	padding-left: 50px;
 	margin-bottom: 0;
+	text-align: left;
 }
 
 .template-1-header h6 {
@@ -66,4 +67,9 @@
 	color: #dadada;
 	font-size: .8em;
 	text-align: left;
+}
+
+.primary-button.template-1 {
+	background: #fff;
+	color: #333;
 }

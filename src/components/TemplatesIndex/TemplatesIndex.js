@@ -11,13 +11,13 @@ class TemplatesIndex extends Component {
 					<Link to='templates/1/new'>
 						<div className='template-item'>
 						<h4>Template 1</h4>
-							<img src='http://placehold.it/250x200' />
+							<img src='http://placehold.it/250x200' alt='template-1'/>
 						</div>
 					</Link>
 					<Link to='templates/2/new'>
 						<div className='template-item'>
 						<h4>Template 2</h4>
-							<img src='http://placehold.it/250x200' />
+							<img src='http://placehold.it/250x200' alt='template-2'/>
 
 						</div>
 					</Link>

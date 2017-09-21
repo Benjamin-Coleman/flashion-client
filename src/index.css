@@ -1,3 +1,10 @@
+/*@import 'normalize.css/normalize.css';*/
+
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
 body {
   margin: 0;
   padding: 0;

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import thunk from 'redux-thunk'
 import NavBar from './components/NavBar/NavBar'
 import Home from './components/Home/Home'
-import TemplatesIndex from './components/Templates/TemplatesIndex'
+import TemplatesIndex from './components/TemplatesIndex/TemplatesIndex'
 import Create from './components/Create/Create'
 import Lookbook from './components/Lookbook/Lookbook'
 
@@ -24,7 +24,8 @@ class App extends Component {
         <Route exact path="/" component={ Home } />
         <Route exact path="/templates" component={ TemplatesIndex } />
         <Route exact path="/templates/:id/new" component={ Create } />
-        <Route exact path="/lookbooks/:brandName/:collection" component={ Lookbook } />
+        <Route exact path="/lookbooks/preview/:brandName/:collection" component={ Lookbook } />
+        <Route exact path="/lookbooks/:id" component={ Lookbook } />
       </div>
     );
   }
