@@ -1,0 +1,64 @@
+* {
+	text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+  font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+}
+
+@font-face {
+  font-family: 'Avenir';
+  src: url('/assets/fonts/AvenirLTW02-85Heavy.eot');
+  src: url('/assets/fonts/AvenirLTW02-85Heavy.eot?#iefix') format('embedded-opentype'),
+    url('/assets/fonts/AvenirLTW02-85Heavy.woff') format('woff'),
+    url('/assets/fonts/AvenirLTW02-85Heavy.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Avenir';
+  src: url('/assets/fonts/AvenirLTW02-65Medium.eot');
+  src: url('/assets/fonts/AvenirLTW02-65Medium.eot?#iefix') format('embedded-opentype'),
+    url('/assets/fonts/AvenirLTW02-65Medium.woff') format('woff'),
+    url('/assets/fonts/AvenirLTW02-65Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Avenir';
+  src: url('/assets/fonts/AvenirLTW02-45Book.eot');
+  src: url('/assets/fonts/AvenirLTW02-45Book.eot?#iefix') format('embedded-opentype'),
+    url('/assets/fonts/AvenirLTW02-45Book.woff') format('woff'),
+    url('/assets/fonts/AvenirLTW02-45Book.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Avenir';
+  src: url('/assets/fonts/AvenirLTW01-35Light.eot');
+  src: url('/assets/fonts/AvenirLTW01-35Light.eot?#iefix') format('embedded-opentype'),
+    url('/assets/fonts/AvenirLTW01-35Light.woff') format('woff'),
+    url('/assets/fonts/AvenirLTW01-35Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Avenir';
+  src: url('/assets/fonts/AvenirLTW01-35LightOblique.eot');
+  src: url('/assets/fonts/AvenirLTW01-35LightOblique.eot?#iefix') format('embedded-opentype'),
+    url('/assets/fonts/AvenirLTW01-35LightOblique.woff') format('woff'),
+    url('/assets/fonts/AvenirLTW01-35LightOblique.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Avenir';
+  src: 
+    url('/assets/fonts/avenir-bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
