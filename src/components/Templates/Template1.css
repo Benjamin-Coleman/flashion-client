@@ -1,3 +1,7 @@
+.template-1-header {
+	overflow: hidden
+}
+
 .template-1-header h1 {
 	font-size: 4em;
 	padding-left: 3em;
@@ -72,4 +76,30 @@
 .primary-button.template-1 {
 	background: #fff;
 	color: #333;
+}
+
+.product-img-wrap {
+	position: relative;
+}
+
+.template-1-product-row.even .product-img-wrap .image-cover {
+	/*content: '';*/
+	background: #fff;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	transform-origin: left;
+}
+
+.template-1-product-row .product-img-wrap .image-cover {
+	/*content: '';*/
+	background: #fff;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	transform-origin: right;
 }

@@ -12,7 +12,7 @@ export default function reducer(state =
 	switch (action.type) {
 		case "LOGIN":
 			localStorage.setItem('jwt', action.payload.jwt)
-			return {data: action.payload.user}
+			return {data: action.payload}
 		case "SIGN_UP":
 			return Object.assign({}, state, {data: action.payload})
 		case "LOG_OUT":

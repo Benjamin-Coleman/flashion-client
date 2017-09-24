@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './Login.css'
 import { login } from "../../actions/auth"
 import { connect } from 'react-redux'
+import animation from './animation'
 
 class Login extends Component {
 
@@ -23,10 +24,24 @@ class Login extends Component {
 		this.setState({ password: e.target.value})
 	}
 
+	// componentDidMount() {
+	// 	animation.show(this.refs.loginWrapper)
+	// }
+
+	// componentWillExit() {
+	// 	animation.hide(this.refs.loginWrapper)
+	// }
+
+	componentDidEnter() {
+		console.log('rtg enter')
+	}
+
+
 	render() {
-		console.log(this.state)
+		console.log(this)
 		return (
-			<div className="login-wrapper">
+
+			<div className="login-wrapper" ref="loginWrapper">
 				<form className="login-form" onSubmit={this.handleSubmit}>
 					<h1>Login</h1>
 					<div><input type='text' onChange={this.handleUsername} value={this.state.username} placeholder='Username' required/></div>
@@ -34,6 +49,7 @@ class Login extends Component {
 					<div><input className="primary-button" type='submit' /></div>
 				</form>
 			</div>
+
 			)
 	}
 }

@@ -1,7 +1,13 @@
+::selection{
+  background: #333;
+  color: white;
+}
+
 #root, .App, html, body {
   position: relative;
   width: 100%;
-  height: 100%;
+  /*height: 100%;*/
+  min-height: 100vh;
 }
 
 a {
@@ -14,11 +20,39 @@ a {
   margin: 0 auto;
 }
 
+/* Page Transitions */
+
+.fade-enter{
+  z-index:1;
+  opacity:0;
+  overflow:hidden
+}
+
+.fade-enter.fade-enter-active{
+  opacity:1;
+  transition:opacity .35s ease-in;
+  overflow:hidden
+}
+
+.fade-leave{
+  z-index:1;
+  opacity:1;
+  overflow:hidden
+}
+
+.fade-enter.fade-leave-active{
+  opacity:0;
+  transition:opacity .35s ease-in;
+  overflow:hidden
+}
+
 /* Typography
 ============================================*/
 
 h1, h2, h3, h4, h5 {
   color: #222;
+  margin-top: 0;
+  padding-top: 10px;
 }
 
 p {

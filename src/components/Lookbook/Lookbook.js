@@ -11,17 +11,14 @@ class Lookbook extends Component {
 	componentWillMount = () => {
 		if (this.props.match.params.id){
 			this.props.fetchLookbook(this.props.match.params.id)
-			console.log(this.props)
 		}
 	}
 
 	componentDidUpdate = () => {
-		console.log('receiving props')
 		this.renderTemplate()
 	}
 
 	renderTemplate() {
-			console.log(this.props.data)
 		switch(this.props.data.templateId){
 		case 1:
 			return <Template1 />

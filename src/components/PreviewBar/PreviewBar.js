@@ -3,11 +3,20 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { saveCreateData } from '../../actions/templates'
 
-
 class PreviewBar extends Component {
 
+	// loggedIn = () => {
+	// 	return !!localStorage.getItem("jwt")
+	// }
+
+	// componentWillMount = () => {
+	// 	if (this.loggedIn()) {
+	// 		this.props.getUserData(localStorage.getItem('jwt'))
+	// 	}
+	// }
+
 	handlePublishLookbook = () => {
-		this.props.saveCreateData(this.props.data, this.props.currentUserId).then(() => this.props.history.push(`/lookbooks/${this.props.data.saveResponse.lookbookId}`))
+		this.props.saveCreateData(this.props.data, this.props.user.data.user.id).then(() => this.props.history.push(`/lookbooks/${this.props.data.saveResponse.lookbookId}`))
 		console.log(this.props)
 		// this.props.history.push(`/lookbooks/${this.props.data.saveResponse.lookbookId}`)
 	}
@@ -24,7 +33,7 @@ class PreviewBar extends Component {
 
 const mapStateToProps = state => ({
 	data: state.templates,
-	currentUserId: state.auth.data.user.id
+	user: state.auth
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -44,7 +44,7 @@ class Template2 extends Component {
 		return (
 			<div style={{width: '100%', height: '100%'}}>
 				<Route path='/lookbooks/preview' render={(props) => <PreviewBar {...props}/>}/>
-				<div className="wrapper">
+				<div className="wrapper" style={{ background: '#fff', height: '100vh'}}>
 					<div className="template-2-container">
 						<div className="template-2-controls">
 							<div className="template-2-previous" onClick={this.handlePrevious}>
