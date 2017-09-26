@@ -1,0 +1,36 @@
+.profile-header {
+	width: 100%;
+	background: white;
+	box-shadow: 3px 5px 20px 0 rgba(72,76,145,0.50);
+	padding-left: 10%;
+	margin-top: 30px;
+}
+
+.profile-header h1 {
+	font-size: 3em;
+	color: #444;
+	position: relative;
+	display: inline;
+}
+
+.profile-header h1:before {
+	content: '';
+	height: 8px;
+	width: 100%;
+	position: absolute;
+	bottom: -5px;
+	right: 0;
+	background: linear-gradient(315deg, #929BEF 0%, #63E2FF 100%);;
+}
+
+.profile-header h6 {
+	text-transform: uppercase;
+	margin: 0;
+	padding: 30px 0 20px 20px;
+	font-weight: 400;
+	letter-spacing: 3px;
+	font-size: 14px;
+	color: #676973;
+	font-weight: 400;
+
+}

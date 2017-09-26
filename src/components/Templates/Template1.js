@@ -2,20 +2,58 @@ import React, { Component } from 'react'
 import './Template1.css'
 import PreviewBar from '../PreviewBar/PreviewBar'
 import { fetchLookbook } from '../../actions/templates'
+import { fetchCustomizations } from '../../actions/templates'
 import { Route } from 'react-router-dom'
 // import * as ScrollMagic from 'scrollmagic'
 import { TweenLite, TimelineMax, TweenMax, Expo } from 'gsap'
+import ColorPicker from 'react-color-picker'
+import 'react-color-picker/index.css'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 class Template1 extends Component {
 
+	state = {
+		...this.props.data,
+		editDialogues: {
+			productInfoColor: false,
+		},
+		customizations: {
+			color1: ''
+		},
+		editable: false,
+	}
+
 	componentWillMount() {
+		// this.props.fetchCustomizations(this.props.match.params.id)
 		this.tl = new TimelineMax()
+		if (this.props.match.url.includes('edit')){
+		this.setState({ editable: true})
+		}
+	}
+
+	onDrag = (color, c) => {
+		this.setState({
+			customizations: {
+				...this.state.customizations,
+				color1: color,
+			}
+		})
+	}
+
+	addEditListeners = () => {
+		console.log('setting up event listeners')
+		const productInfoBoxes = document.querySelectorAll('.template-1-product-info')
+		console.log(productInfoBoxes)
+		productInfoBoxes.forEach( box => {
+			box.addEventListener('click', () => {this.setState({editDialogues: {...this.state.editDialogues, productInfoColor: true}})})
+		})
 	}
 
 	componentDidMount() {
+		this.addEditListeners()
+
 		const productCovers = document.querySelectorAll('.image-cover')
 		const infoBoxes = document.querySelectorAll('.template-1-product-info')
 
@@ -112,11 +150,13 @@ class Template1 extends Component {
 
 	render() {
 		console.log(this.props)
+		console.log(this.state)
 
-		const products = this.props.data.userInput.products.map((product, index) => (
+		const products = this.state.userInput.products.map((product, index) => (
 				<div className={index % 2 === 0 ? "template-1-product-row even" : "template-1-product-row"} key={index} >
 					<div className="product-img-wrap"><div className="image-cover"></div><img className={`product-image product-${index+1}`} src={product.imageURL} alt={product.name}/></div>
-					<div className={index % 2 === 0 ? "template-1-product-info even" : "template-1-product-info"} >
+					{this.state.editDialogues.productInfoColor ? <ColorPicker value={this.state.customizations.color1} onDrag={this.onDrag} /> : null}
+					<div className={index % 2 === 0 ? "template-1-product-info even" : "template-1-product-info"} style={{backgroundColor: this.state.customizations.color1 }}>
 						<h3>{product.name}</h3>
 						<p>{product.description}</p>
 						{product.URL !== '' ? <a href={product.URL} className="primary-button template-1"><span>View On Site</span></a> : null}
@@ -127,8 +167,8 @@ class Template1 extends Component {
 			<div style={{ background: 'white'}}>
 				<Route path='/lookbooks/preview' render={(props) => <PreviewBar {...props}/>}/>
 				<div className="template-1-header">
-					<h1 ref="brandName">{this.props.data.userInput.brandName}</h1>
-					<h6>{this.props.data.userInput.collectionName}</h6>
+					<h1 ref="brandName">{this.state.userInput.brandName}</h1>
+					<h6>{this.state.userInput.collectionName}</h6>
 				</div>
 				{ products }
 			</div>
@@ -141,7 +181,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-	fetchLookbook: bindActionCreators(fetchLookbook, dispatch)
+	fetchLookbook: bindActionCreators(fetchLookbook, dispatch),
+	fetchCustomizations: bindActionCreators(fetchCustomizations, dispatch)
 })
 
-export default connect(mapStateToProps)(Template1)
+export default connect(mapStateToProps, mapDispatchToProps)(Template1)

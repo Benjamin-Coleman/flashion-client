@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import TemplatePreview from './TemplatePreview'
 import './TemplatesIndex.css'
 import { TweenMax } from 'gsap'

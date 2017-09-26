@@ -38,12 +38,13 @@ class Login extends Component {
 
 
 	render() {
-		console.log(this)
+		console.log(this.props)
 		return (
 
 			<div className="login-wrapper" ref="loginWrapper">
 				<form className="login-form" onSubmit={this.handleSubmit}>
 					<h1>Login</h1>
+					{this.props.errors.data.user.errors ? <div ref="errors" style={{ visibility: 'visible', color: 'red'}}>{this.props.errors.data.user.errors}</div> : null}
 					<div><input type='text' onChange={this.handleUsername} value={this.state.username} placeholder='Username' required/></div>
 					<div><input type='password' onChange={this.handlePassword} value={this.state.password} placeholder='Password' required/></div>
 					<div><input className="primary-button" type='submit' /></div>
@@ -54,7 +55,11 @@ class Login extends Component {
 	}
 }
 
-function mapDispatchToProps (dispatch) {
+function mapStatetoProps(state) {
+	return {errors: state.auth}
+}
+
+function mapDispatchToProps(dispatch) {
 	return {
 		login: (userData, history) => {
 			dispatch(login(userData, history))
@@ -62,4 +67,4 @@ function mapDispatchToProps (dispatch) {
 	}
 }
 
-export default connect(null, mapDispatchToProps)(Login)
+export default connect(mapStatetoProps, mapDispatchToProps)(Login)

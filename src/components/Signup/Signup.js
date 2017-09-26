@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { signup } from '../../actions/auth'
 import './Signup.css'
+import { TweenMax } from 'gsap'
 
 class Signup extends Component {
 
@@ -9,12 +10,38 @@ class Signup extends Component {
 		username: '',
 		email: '',
 		password: '',
-		confirm_password: ''
+		confirm_password: '',
+		errors: []
+	}
+
+	valididate = (state) => {
+		if (state.username === ''){
+			this.setState({ errors: 'Please enter a username' })
+			return false
+		}
+		if (state.password === ''){
+			this.setState({ errors: 'Please enter a password' })
+			return false
+		}
+		if (state.password !== state.confirm_password){
+			this.setState({ errors: 'Passwords do not match' })
+			return false
+		}
+		return true
+	}
+
+	showErrors() {
+		const animation = TweenMax.fromTo(this.refs.errors, 1, {autoAlpha: 0}, {autoAlpha: 1, ease: 'Power2'})
+		return animation
 	}
 
 	handleSubmit = (event) => {
 		event.preventDefault()
+		if (this.valididate(this.state)) {
 		this.props.signup(this.state, this.props.history)
+		} else {
+			this.showErrors()
+		}
 	}
 
 	handleUsername = (e) => {
@@ -39,6 +66,7 @@ class Signup extends Component {
 			<div className="signup-wrapper">
 				<form className="signup-form" onSubmit={this.handleSubmit}>
 					<h1>Signup</h1>
+					<div ref="errors" style={{ visibility: 'hidden', color: 'red'}}>{this.state.errors}</div>
 					<div><input type='text' onChange={this.handleUsername} value={this.state.username} placeholder='Username' required/></div>
 					<div><input type='text' onChange={this.handleEmail} value={this.state.email} placeholder='Email' required/></div>
 					<div><input type='password' onChange={this.handlePassword} value={this.state.password} placeholder='Password' required/></div>

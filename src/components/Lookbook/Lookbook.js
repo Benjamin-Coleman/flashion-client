@@ -21,7 +21,7 @@ class Lookbook extends Component {
 	renderTemplate() {
 		switch(this.props.data.templateId){
 		case 1:
-			return <Template1 />
+			return <Template1 match={this.props.match}/>
 		case 2:
 			return <Template2 />
 		default:

@@ -21,6 +21,20 @@ export function fetchLookbook(lookbookId){
 	}
 }
 
+export function fetchCustomizations(lookbookId){
+	return function(dispatch) {
+		const url = `http://localhost:3000/api/v1/customizations/${lookbookId}`
+		const options = {
+			header: { "Content-Type": "application/json", "Accept": "application/json"}
+		}
+		fetch(url, options)
+			.then((res) => res.json())
+			.then((json) => {
+				dispatch({ type:"FETCH_LOOKBOOK", payload: json})
+			})
+	}
+}
+
 export const collectCreateData = (data) => {
 	return {
 		type: 'COLLECT_CREATE_DATA',

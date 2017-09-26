@@ -17,7 +17,9 @@ export function login(userData, history) {
 					dispatch({type: "LOGIN", payload: json})
 					history.push('/', json.success)
 				}
+
 				else {
+					dispatch({type: "FAILED_LOGIN", payload: json.message})
 					history.push('/login')
 				}
 			})

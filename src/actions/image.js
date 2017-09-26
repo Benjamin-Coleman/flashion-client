@@ -10,7 +10,7 @@ export function setImageToUpload(headers, imageData){
 		fetch(url, options)
 			.then((res) => res.json())
 			.then((json) => {
-				console.log(json)
+				dispatch({type: 'SET_IMAGE', payload: json})
 			})
 	}
 }

@@ -13,6 +13,32 @@ class Template2 extends Component {
 		currentIndex: 0,
 	}
 
+	componentWillMount() {
+		this.addListerners()
+	}
+
+	componentWillUnmount() {
+		this.removeListerners()
+	}
+
+	addListerners = () => {
+    	document.addEventListener('keyup', this.onKeyUp, false)
+    	document.addEventListener('wheel', this.onWheel, false)
+	}
+
+	removeListerners = () => {
+    	document.removeEventListener('keyup', this.onKeyUp, false)
+    	document.removeEventListener('wheel', this.onWheel, false)
+	}
+
+	onKeyUp = (ev) => {
+		if(ev.keyCode === 39 || ev.keyCode === 40 ) {
+		  this.handleNext()
+		} else if (ev.keyCode === 37 || ev.keyCode === 38) {
+		  this.handlePrevious()
+		}
+	} 
+
 	handleNext = () => {
 		const currentIndex = (this.state.currentIndex < this.props.data.userInput.products.length - 1 ) ? this.state.currentIndex + 1 : 0;
 		this.setState({ currentIndex: currentIndex })
@@ -26,9 +52,6 @@ class Template2 extends Component {
 	render() {
 
 		const products = this.props.data.userInput.products.map((product, index) => (
-
-				////////////
-				//////////
 
 				<div className={index === this.state.currentIndex ? "template-2-product-wrapper active" : "template-2-product-wrapper"} key={index}>
 					

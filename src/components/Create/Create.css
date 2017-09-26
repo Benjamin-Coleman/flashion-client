@@ -1,0 +1,71 @@
+.create-lookbook-wrapper{
+	background: white;
+}
+
+.create-header h6{
+	margin: 0;
+	padding-top: 30px;
+	font-weight: 400;
+	letter-spacing: 3px;
+	font-size: 12px;
+}
+
+.create-header h1 {
+	position: relative;
+	margin: 0 0 0 10px;
+	padding-left: 20px;
+	padding-right: 30px;
+	font-size: 3em;
+	display: inline;
+}
+
+.create-header h1:before {
+	content: '';
+	height: 8px;
+	width: 100%;
+	position: absolute;
+	bottom: -5px;
+	right: 0;
+	background: linear-gradient(315deg, #929BEF 0%, #63E2FF 100%);;
+}
+
+.create-lookbook-form {
+	margin-top: 30px;
+	background: white;
+	padding: 30px 80px;
+	/*border-radius: 5px;*/
+	margin-bottom: 10%;
+	box-shadow: 3px 5px 20px 0 rgba(72,76,145,0.50);
+	text-align: center;
+}
+
+.create-lookbook-form h3 {
+	font-size: 1em;
+	text-align: center;
+	font-family: 'Avenir', sans-serif;
+	margin: 15px 0 0 0;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    font-weight: 500;
+    font-size: 1.6em;
+    font-style: italic;
+	color: #d5d7e1;
+}
+
+.create-lookbook-form input {
+	width: 100%;
+}
+
+.img-preview {
+	width: 50%;
+	max-height: 100%;
+	overflow:hidden;
+}
+
+.img-preview img {
+	width: 100%;
+}
+
+.create-header {
+	padding: 20px;
+}

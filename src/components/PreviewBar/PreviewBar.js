@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { saveCreateData } from '../../actions/templates'
+import './PreviewBar.css'
 
 class PreviewBar extends Component {
 
@@ -25,7 +26,7 @@ class PreviewBar extends Component {
 		console.log(this.props)
 		return (
 			<div className="preview-bar">
-				<div><button onClick={this.handlePublishLookbook}>PUBLISH LOOKBOOK</button></div>
+				<div className="primary-button" onClick={this.handlePublishLookbook}>PUBLISH LOOKBOOK</div>
 			</div>
 			)
 	}

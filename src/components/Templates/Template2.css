@@ -118,6 +118,7 @@
 
 .template-2-next, .template-2-previous {
     transition: all 300ms;
+    text-shadow: #797979 3px 3px 3px;
 }
 
 .template-2-next:hover, .template-2-previous:hover {

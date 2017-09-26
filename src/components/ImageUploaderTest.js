@@ -31,8 +31,6 @@ class ImageUploaderTest extends React.Component {
 
    this.props.setImageToUpload(myHeaders, myBody)
 
-
-
  }
 
   _handleImageChange(e) {
@@ -64,11 +62,9 @@ class ImageUploaderTest extends React.Component {
    console.log(this.state)
    return (
      <div className="previewComponent">
-     <ReactS3Uploader signingUrl="http://localhost:3000/api/v1/testimageupload" signingUrlMethod="POST"/>
          <input className="fileInput"
            type="file"
            onChange={(e)=>this._handleImageChange(e)} />
-
 
        <div className="imgPreview">
          {$imagePreview}
