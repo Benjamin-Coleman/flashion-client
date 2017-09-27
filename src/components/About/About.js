@@ -4,9 +4,9 @@ import './About.css'
 
 class About extends Component {
 
-	// componentDidMount() {
-	// 	TweenMax.fromTo(this.refs.about, .5, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: 'Power2'})
-	// }
+	componentDidMount() {
+		TweenMax.fromTo(this.refs.about, .5, {opacity: 0, y: 20}, {opacity: 1, y: 0, ease: 'Power2'})
+	}
 
 	render() {
 		return( 

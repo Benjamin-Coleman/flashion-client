@@ -26,7 +26,7 @@ class App extends Component {
     return !!localStorage.getItem("jwt")
   }
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     if (this.loggedIn()) {
       this.props.getUserData(localStorage.getItem('jwt'))
     }

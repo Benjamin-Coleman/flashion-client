@@ -1,6 +1,8 @@
+import axios from 'axios'
+
 export function login(userData, history) {
 	return function (dispatch) {
-		const url = 'http://localhost:3000/api/v1/login'
+		const url = 'http://localhost:3000/api/login'
 		const body = JSON.stringify(userData)
 		const headers = {
 			method: 'post',
@@ -29,25 +31,27 @@ export function login(userData, history) {
 export function signup(userData, history) {
 
 	return function(dispatch) {
-		const url = 'http://localhost:3000/api/v1/signup'
+		const url = 'http://localhost:3000/api/signup'
 
 		const body = JSON.stringify(userData)
 
 		const headers = {
-			method: 'post',
+			method: 'POST',
 			body: body,
 			headers: {
-				"Content-Type":"application/json",
+				
 				"Accept":"application/json"
 			}
 		}
 
-		fetch(url, headers)
-			.then((res) => res.json())
-			.then((json) => {
-				dispatch({type: "LOGIN", payload: json})
-				history.push('/', json.success)
-			})
+		// fetch(url, headers)
+		// 	.then((res) => res.json())
+		// 	.then((json) => {
+		// 		dispatch({type: "LOGIN", payload: json})
+		// 		history.push('/', json.success)
+		// 	})
+		axios.post(url, userData)
+			.then(res => console.log(res))
 	}
 }
 

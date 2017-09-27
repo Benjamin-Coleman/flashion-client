@@ -1,10 +1,33 @@
 {
   "name": "flashion-client",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "private": true,
+  "scripts": {
+    "start": "react-scripts build && nodemon ./bin/www",
+    "node-start": "nodemon ./bin/www",
+    "react-start": "react-scripts start ",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "proxy": "http://localhost:3000",
   "dependencies": {
     "axios": "^0.16.2",
+    "bcrypt-nodejs": "^0.0.3",
+    "body-parser": "~1.17.1",
+    "cookie-parser": "~1.4.3",
+    "cors": "^2.8.4",
+    "debug": "~2.6.3",
+    "express": "~4.15.2",
+    "express-session": "^1.15.5",
     "gsap": "^1.20.2",
+    "jade": "~1.11.0",
+    "jsonwebtoken": "^7.4.3",
+    "mongoose": "^4.11.7",
+    "morgan": "~1.8.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^3.0.0",
+    "passport-local": "^1.0.0",
     "react": "^15.6.1",
     "react-color-picker": "^4.0.2",
     "react-dom": "^15.6.1",
@@ -14,12 +37,6 @@
     "react-scripts": "1.0.13",
     "react-transition-group": "^1.2.0",
     "redux-thunk": "^2.2.0",
-    "scrollmagic": "^2.0.5"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "serve-favicon": "~2.4.2"
   }
 }

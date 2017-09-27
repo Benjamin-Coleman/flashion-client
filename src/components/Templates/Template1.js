@@ -25,14 +25,6 @@ class Template1 extends Component {
 		editable: false,
 	}
 
-	componentWillMount() {
-		// this.props.fetchCustomizations(this.props.match.params.id)
-		this.tl = new TimelineMax()
-		if (this.props.match.url.includes('edit')){
-		this.setState({ editable: true})
-		}
-	}
-
 	onDrag = (color, c) => {
 		this.setState({
 			customizations: {
@@ -52,12 +44,17 @@ class Template1 extends Component {
 	}
 
 	componentDidMount() {
+		if (this.props.match.url.includes('edit')){
+		this.setState({ editable: true})
+		}
+
+		//setup
+		this.tl = new TimelineMax()
 		this.addEditListeners()
 
 		const productCovers = document.querySelectorAll('.image-cover')
 		const infoBoxes = document.querySelectorAll('.template-1-product-info')
 
-		console.log(productCovers)
 		this.tl
 		.add(TweenMax.staggerFromTo(productCovers, 1.5, {scaleX: 1}, {scaleX: 0, ease: Expo}, .7))
 		.add(TweenMax.staggerFromTo(infoBoxes, 1, {opacity: 0, x: 20}, {opacity: 1, x: 0, ease: Expo}, .3), .3, "-=0.3")
