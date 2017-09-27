@@ -12,19 +12,29 @@ export function login(userData, history) {
 				"Accept":"application/json"
 			}
 		}
-		fetch(url, headers)
-			.then((res) => res.json())
-			.then((json) => {
-				if (json.jwt) {
-					dispatch({type: "LOGIN", payload: json})
-					history.push('/', json.success)
+		// fetch(url, headers)
+		// 	.then((res) => res.json())
+		// 	.then((json) => {
+		// 		if (json.jwt) {
+		// 			dispatch({type: "LOGIN", payload: json})
+		// 			history.push('/', json.success)
+		// 		}
+
+		// 		else {
+		// 			dispatch({type: "FAILED_LOGIN", payload: json.message})
+		// 			history.push('/login')
+		// 		}
+		// 	})
+		axios.post('http://localhost:3000/api/login', userData)
+			.then(res => {if (res.status === 200) {
+					dispatch({type: "LOGIN", payload: res.data})
+					history.push('/', res.statusText)
 				}
 
 				else {
-					dispatch({type: "FAILED_LOGIN", payload: json.message})
+					dispatch({type: "FAILED_LOGIN", payload: res})
 					history.push('/login')
-				}
-			})
+				}})
 	}
 }
 

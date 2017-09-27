@@ -1,11 +1,12 @@
 var express = require('express');
 var passport = require('passport')
 require('../config/passport')(passport)
+// var LocalStrategy = require('passport-local').Strategy;
 var jwt = require('jsonwebtoken')
 var router = express.Router();
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose')
-var User = require('../models/user')
+// var bodyParser = require('body-parser');
+// var mongoose = require('mongoose')
+// var User = require('../models/user')
 
 // mongoose.connect('mongodb://flashion:flatiron@ds149124.mlab.com:49124/flashion');
 
@@ -30,31 +31,81 @@ var User = require('../models/user')
 //             failureFlash : true // allow flash messages
 // }));
 
-router.post('/signup', function(req, res){
-	console.log('body:', req.body, 'un', req.body.username)
-	var email = req.body.email;
-	var username = req.body.username;
-	var password = req.body.password;
 
-	// validation stuff later
-	var newUser = new User({
-		email: email,
-		username: username,
-		password: password
-	})
 
-	User.createUser(newUser, function(err, user){
-			if(err) throw err;
-			console.log(user);
-		});
-	console.log('signup route', req.body)
+// // Below works but without setting a JWT
 
-	res.json({username: username})
+// router.post('/signup', function(req, res){
+// 	console.log('request body:', req.body, 'un', req.body.username)
+// 	var email = req.body.email;
+// 	var username = req.body.username;
+// 	var password = req.body.password;
 
-})
+// 	// validation stuff later
+// 	var newUser = new User({
+// 		email: email,
+// 		username: username,
+// 		password: password
+// 	})
+
+// 	User.createUser(newUser, function(err, user){
+// 			if(err) throw err;
+// 			console.log(user);
+// 		});
+// 	console.log('signup route', req.body)
+
+// 	res.json({username: username})
+
+// })
+
+// router.get('/currentuser', passport.authenticate('jwt', { session: false}), function(req, res) {
+// 	console.log('current from api routes')
+//   res.json({user_id: req.user._id, email: req.user.local.email})
+// })
+
+
+// passport.use(new LocalStrategy(
+//   function(username, password, done) {
+//    User.getUserByUsername(username, function(err, user){
+//    	if(err) throw err;
+//    	if(!user){
+//    		return done(null, false, {message: 'Unknown User'});
+//    	}
+
+//    	User.comparePassword(password, user.password, function(err, isMatch){
+//    		if(err) throw err;
+//    		if(isMatch){
+//    			return done(null, user);
+//    		} else {
+//    			return done(null, false, {message: 'Invalid password'});
+//    		}
+//    	});
+//    });
+//   }));
+
+// passport.serializeUser(function(user, done) {
+//   done(null, user.id);
+// });
+
+// passport.deserializeUser(function(id, done) {
+//   User.getUserById(id, function(err, user) {
+//     done(err, user);
+//   });
+// });
+
+// router.post('/login',
+//   passport.authenticate('local'),
+//   function(req, res) {
+//     res.json({success: 'successful login'});
+//   });
+
+router.post('/signup', passport.authenticate('local-signup', {
+            failureFlash : true // allow flash messages
+}), function(req, res) {
+	res.json({ success: 'Signed up'})
+});
 
 router.get('/currentuser', passport.authenticate('jwt', { session: false}), function(req, res) {
-	console.long('current from api routes')
   res.json({user_id: req.user._id, email: req.user.local.email})
 })
 

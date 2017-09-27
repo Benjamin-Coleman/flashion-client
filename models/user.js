@@ -5,11 +5,21 @@ var Schema = mongoose.Schema, ObjectId = Schema.ObjectId
 
 var UserSchema = new Schema({
   local: {
-    email: String,
-    password: String,
-    username: String
+    username: String,
+    password: String
   }
 })
+
+
+UserSchema.methods.generateHash = function(password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
+}
+
+UserSchema.methods.validPassword = function(password) {
+  return bcrypt.compareSync(password, this.local.password)
+}
+
+module.exports = mongoose.model('User', UserSchema)
 
 // UserSchema.methods.generateHash = function(password) {
 //   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
@@ -22,7 +32,7 @@ var UserSchema = new Schema({
 
 // module.exports = mongoose.model('User', UserSchema)
 
-var User = module.exports = mongoose.model('User', UserSchema);
+// var User = module.exports = mongoose.model('User', UserSchema);
 
 // module.exports.createUser = function(newUser, callback){
 // 	bcrypt.genSalt(10, function(err, salt) {
@@ -33,28 +43,29 @@ var User = module.exports = mongoose.model('User', UserSchema);
 // 	});
 // }
 
-module.exports.createUser = function(newUser, callback) {
-	var hashed = bcrypt.hashSync(newUser.password, bcrypt.genSaltSync(8), null)
-	newUser.password = hashed
-	newUser.save(callback)
-}
+// module.exports.createUser = function(newUser, callback) {
+// 	var hashed = bcrypt.hashSync(newUser.password, bcrypt.genSaltSync(8), null)
+// 	newUser.password = hashed
+// 	console.log('new user in user model', newUser)
+// 	newUser.save(callback)
+// }
 
-UserSchema.methods.generateHash = function(password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
-}
+// UserSchema.methods.generateHash = function(password) {
+//   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
+// }
 
-module.exports.getUserByUsername = function(username, callback){
-	var query = {username: username};
-	User.findOne(query, callback);
-}
+// module.exports.getUserByUsername = function(username, callback){
+// 	var query = {username: username};
+// 	User.findOne(query, callback);
+// }
 
-module.exports.getUserById = function(id, callback){
-	User.findById(id, callback);
-}
+// module.exports.getUserById = function(id, callback){
+// 	User.findById(id, callback);
+// }
 
-module.exports.comparePassword = function(candidatePassword, hash, callback){
-	bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
-    	if(err) throw err;
-    	callback(null, isMatch);
-	});
-}
+// module.exports.comparePassword = function(candidatePassword, hash, callback){
+// 	bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
+//     	if(err) throw err;
+//     	callback(null, isMatch);
+// 	});
+// }
