@@ -28,7 +28,7 @@ class App extends Component {
 
   componentDidMount = () => {
     if (this.loggedIn()) {
-      this.props.getUserData(localStorage.getItem('jwt'))
+      // this.props.getUserData(localStorage.getItem('jwt'))
     }
     window.addEventListener('resize', () => this.props.onResize({ width: window.innerWidth, height: window.innerHeight }))
   }

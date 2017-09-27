@@ -27,7 +27,6 @@ class Create extends Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault()
-		console.log(this.props)
 		const sanitizedBrandName = this.state.userInput.brandName.split(' ').join('-').toLowerCase()
 		const sanitizedCollectionName = this.state.userInput.collectionName.split(' ').join('-').toLowerCase()
 		this.props.history.push(`/lookbooks/preview/${sanitizedBrandName}/${sanitizedCollectionName}`)
@@ -108,12 +107,10 @@ class Create extends Component {
 			}
 
 			const imgData = reader.onloadend()
-			console.log(imgData)
 			imgData.imagePreviewUrl = reader.result
 
 			return { ...product, image: imgData }
 		})
-		console.log(newProducts)
 		this.setState({ 
 			...this.state, userInput: {
 				...this.state.userInput, products: newProducts
@@ -215,7 +212,6 @@ updateImageState = (idx, data) => {
 	// }
 
 	render() {
-		console.log(this.state)
 		return (
 			<div className="create-lookbook-wrapper">
 				<div className="page-wrapper">

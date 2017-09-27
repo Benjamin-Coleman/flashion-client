@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { saveCreateData } from '../../actions/templates'
+import { withRouter } from 'react-router-dom'
 import './PreviewBar.css'
 
 class PreviewBar extends Component {
@@ -17,7 +18,7 @@ class PreviewBar extends Component {
 	// }
 
 	handlePublishLookbook = () => {
-		this.props.saveCreateData(this.props.data, this.props.user.data.user.id).then(() => this.props.history.push(`/lookbooks/${this.props.data.saveResponse.lookbookId}`))
+		this.props.saveCreateData(this.props.data, this.props.user.data.user, this.props.history)
 		console.log(this.props)
 		// this.props.history.push(`/lookbooks/${this.props.data.saveResponse.lookbookId}`)
 	}
@@ -41,4 +42,4 @@ const mapDispatchToProps = dispatch => ({
 	saveCreateData: bindActionCreators(saveCreateData, dispatch)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(PreviewBar)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PreviewBar))

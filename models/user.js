@@ -6,7 +6,8 @@ var Schema = mongoose.Schema, ObjectId = Schema.ObjectId
 var UserSchema = new Schema({
   local: {
     username: String,
-    password: String
+    password: String,
+    lookbooks: []
   }
 })
 
