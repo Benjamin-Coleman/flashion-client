@@ -12,6 +12,7 @@ export function login(userData, history) {
 				"Accept":"application/json"
 			}
 		}
+
 		// fetch(url, headers)
 		// 	.then((res) => res.json())
 		// 	.then((json) => {
@@ -26,7 +27,7 @@ export function login(userData, history) {
 		// 		}
 		// 	})
 		axios.post('http://localhost:3000/api/login', userData)
-			.then(res => {if (res.status === 200) {
+			.then(res => {if (res.data.success) {
 					dispatch({type: "LOGIN", payload: res.data})
 					history.push('/', res.statusText)
 				}
@@ -61,30 +62,69 @@ export function signup(userData, history) {
 		// 		history.push('/', json.success)
 		// 	})
 		axios.post(url, userData)
-			.then(res => console.log(res))
+			.then(res => {
+				console.log(res.data)
+				dispatch({type: "LOGIN", payload: res.data})
+				history.push('/', res.data)
+			})
 	}
 }
 
-export function getUserData(jwt){
-    return function(dispatch) {
-      const url = 'http://localhost:3000/api/v1/currentuser'
+// export function getUserData(jwt){
+//     return function(dispatch) {
+//       const url = 'http://localhost:3000/api/v1/currentuser'
 
-      const headers = {
-        method: 'get',
-        headers: {
-          "Authorization":`Bearer ${jwt}`,
-          "Accept":"application/json"
-        }
-      }
+//       const headers = {
+//         method: 'get',
+//         headers: {
+//           "Authorization":`Bearer ${jwt}`,
+//           "Accept":"application/json"
+//         }
+//       }
 
-      fetch(url, headers)
-      .then(res => res.json())
-      .then(json => {
-        if (json.lookbooks) {
-          dispatch({type: "GET_USER", payload: json})
-        }
-      })
-    }
+//       fetch(url, headers)
+//       .then(res => res.json())
+//       .then(json => {
+//         if (json.lookbooks) {
+//           dispatch({type: "GET_USER", payload: json})
+//         }
+//       })
+//     }
+// }
+
+// export function getUserData() {
+
+// 	var instance = axios.create({
+// 		// url: 'http://localhost:3000/api/currentuser',
+// 		auth: `Bearer ${localStorage.getItem("jwt")}`
+// 	})
+
+// 	return function(dispatch) {
+// 		const url = 'http://localhost:3000/api/currentuser'
+
+// 		// axios.get({url: url, auth: `Bearer ${localStorage.getItem("jwt")}`})
+// 		// 	.then(res => {
+// 		// 		dispatch({ type: "GET_USER", payload: res})
+// 		// 	})
+// 		instance.get(url).then(res => {
+// 				dispatch({ type: "GET_USER", payload: res})
+// 			})
+// 	}
+// }
+
+export function getUserData() {
+	return function(dispatch) {
+		fetch('http://localhost:3000/api/currentuser', {
+			method: 'GET',
+			headers: {
+		        'Content-Type': 'application/json',
+		        'Accept': 'application/json',
+		        'Authorization': `Bearer ${localStorage.getItem("jwt")}`
+			}
+		})
+		.then(res => res.json())
+		.then(json => {console.log(json); dispatch({ type: "GET_USER", payload: json})})
+	}
 }
 
 export function logout() {

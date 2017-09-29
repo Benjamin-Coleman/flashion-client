@@ -7,7 +7,7 @@ var JWTStrategy     = require('passport-jwt').Strategy,
 
 var opts = {}
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = 'christiandiordenimflow';
+opts.secretOrKey = 'learnlovecode';
 
 
 // load up the user model
@@ -30,11 +30,13 @@ module.exports = function(passport) {
 
 
   passport.use(new JWTStrategy(opts, function(jwt_payload, done) {
-    User.findOne({id: jwt_payload.sub}, function(err, user) {
+    console.log("JWT TOKEN BEING USED IN CONFIG", jwt_payload)
+    User.findById(jwt_payload.user_id, function(err, user) {
       if (err) {
         return done(err, false);
       }
       if (user) {
+        console.log('found user', user)
         return done(null, user)
       } else {
         return done(null, false)

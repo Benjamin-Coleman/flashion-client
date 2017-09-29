@@ -30,7 +30,14 @@ class Create extends Component {
 		const sanitizedBrandName = this.state.userInput.brandName.split(' ').join('-').toLowerCase()
 		const sanitizedCollectionName = this.state.userInput.collectionName.split(' ').join('-').toLowerCase()
 		this.props.history.push(`/lookbooks/preview/${sanitizedBrandName}/${sanitizedCollectionName}`)
-		this.props.collectCreateData({...this.state})
+		this.props.collectCreateData({
+			lookbook: {
+				brandName: this.state.userInput.brandName,
+				collectionName: this.state.userInput.collectionName,
+				products: this.state.userInput.products,
+				template: this.state.templateId
+			}
+		})
 	}
 
 	handleProductNameChange = (idx) => (e) => {

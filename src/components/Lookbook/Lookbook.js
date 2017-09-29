@@ -8,7 +8,7 @@ import Template2 from '../Templates/Template2'
 
 class Lookbook extends Component {
 
-	componentWillMount = () => {
+	componentDidMount = () => {
 		if (this.props.match.params.id){
 			this.props.fetchLookbook(this.props.match.params.id)
 		}
@@ -19,7 +19,7 @@ class Lookbook extends Component {
 	}
 
 	renderTemplate() {
-		switch(this.props.data.templateId){
+		switch(this.props.data.lookbook.template){
 		case 1:
 			return <Template1 match={this.props.match}/>
 		case 2:
@@ -30,7 +30,7 @@ class Lookbook extends Component {
 	}
 
 	render() {
-		console.log('rendering lookbooks')
+		console.log('rendering lookbooks', 'THIS.PROPS.DATA', this.props.data)
 		return (
 			<div className='lookbook-container'>
 				{this.renderTemplate()}

@@ -11,6 +11,7 @@ class Template2 extends Component {
 
 	state = {
 		currentIndex: 0,
+		...this.props.data.lookbook
 	}
 
 	componentWillMount() {
@@ -50,8 +51,9 @@ class Template2 extends Component {
 	}
 
 	render() {
+		console.log(this.state)
 
-		const products = this.props.data.userInput.products.map((product, index) => (
+		const products = this.state.products.map((product, index) => (
 
 				<div className={index === this.state.currentIndex ? "template-2-product-wrapper active" : "template-2-product-wrapper"} key={index}>
 					
@@ -78,8 +80,8 @@ class Template2 extends Component {
 							</div>
 						</div>
 						<div className="template-2-header">
-							<h1>{this.props.data.userInput.brandName}</h1>
-							<h6>{this.props.data.userInput.collectionName}</h6>
+							<h1>{this.state.brandName}</h1>
+							<h6>{this.state.collectionName}</h6>
 						</div>
 					<div className="template-2-products-wrapper">
 						{ products }

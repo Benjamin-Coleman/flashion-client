@@ -11,24 +11,24 @@ class Profile extends Component {
     return !!localStorage.getItem("jwt")
   }
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     if (this.loggedIn()) {
       this.props.getUserData(localStorage.getItem('jwt'))
 	    }
-  	}
-
-  componentDidMount = () => {
      const els = document.querySelectorAll('.lookbook-preview')
      TweenMax.staggerFromTo(els, 1, {opacity: 0, y: -20}, {opacity: 1, y:0}, .2)
-  }
+    }
+
+  // componentDidMount = () => {
+  // }
 
 	render() {
-    const renderLookbookPreviews = this.props.user.data.lookbooks.map((x, index) => <LookbookPreview key={index} brandName={x.brand_name} collectionName={x.collection_name} templateThumbnail={`/assets/img/template_preview_${x.template_id}`} lookbookId={x.id}/> )
+    const renderLookbookPreviews = this.props.auth.user.lookbooks.map((x, index) => <LookbookPreview key={index} brandName={x.brandName} collectionName={x.collectionName} templateThumbnail={`/assets/img/template_preview_${x.template}`} lookbookId={x._id}/> )
     console.log(this.props)
 		return (
       <div>
         <div className="profile-header">
-          <h1>{this.props.user.data.user.username}</h1>
+          <h1>{this.props.auth.user.username}</h1>
           <h6>Published Lookbooks</h6>
         </div>
         <div className="page-wrapper">
@@ -46,7 +46,7 @@ class Profile extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.auth
+    auth: state.auth
   }
 }
 

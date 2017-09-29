@@ -56,7 +56,7 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return {
     viewport: state.viewport,
-    user: state.auth
+    auth: state.auth
   }
 }
 

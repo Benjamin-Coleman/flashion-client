@@ -18,7 +18,7 @@ class PreviewBar extends Component {
 	// }
 
 	handlePublishLookbook = () => {
-		this.props.saveCreateData(this.props.data, this.props.user.data.user, this.props.history)
+		this.props.saveCreateData(this.props.data, this.props.auth.user.id, this.props.history)
 		console.log(this.props)
 		// this.props.history.push(`/lookbooks/${this.props.data.saveResponse.lookbookId}`)
 	}
@@ -35,7 +35,7 @@ class PreviewBar extends Component {
 
 const mapStateToProps = state => ({
 	data: state.templates,
-	user: state.auth
+	auth: state.auth
 })
 
 const mapDispatchToProps = dispatch => ({

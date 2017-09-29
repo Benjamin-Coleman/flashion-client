@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'build')));
 
-app.use(session({ secret: 'cats' }))
+app.use(session({ secret: 'learnlovecode' }))
 app.use(passport.initialize());
 app.use(passport.session());
 

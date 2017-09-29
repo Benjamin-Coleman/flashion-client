@@ -20,7 +20,7 @@ class Template1 extends Component {
 			productInfoColor: false,
 		},
 		customizations: {
-			color1: ''
+			
 		},
 		editable: false,
 	}
@@ -149,7 +149,7 @@ class Template1 extends Component {
 		console.log(this.props)
 		console.log(this.state)
 
-		const products = this.state.userInput.products.map((product, index) => (
+		const products = this.state.lookbook.products.map((product, index) => (
 				<div className={index % 2 === 0 ? "template-1-product-row even" : "template-1-product-row"} key={index} >
 					<div className="product-img-wrap"><div className="image-cover"></div><img className={`product-image product-${index+1}`} src={product.imageURL} alt={product.name}/></div>
 					{this.state.editDialogues.productInfoColor ? <ColorPicker value={this.state.customizations.color1} onDrag={this.onDrag} /> : null}
@@ -164,8 +164,8 @@ class Template1 extends Component {
 			<div style={{ background: 'white'}}>
 				<Route path='/lookbooks/preview' render={(props) => <PreviewBar {...props}/>}/>
 				<div className="template-1-header">
-					<h1 ref="brandName">{this.state.userInput.brandName}</h1>
-					<h6>{this.state.userInput.collectionName}</h6>
+					<h1 ref="brandName">{this.state.lookbook.brandName}</h1>
+					<h6>{this.state.lookbook.collectionName}</h6>
 				</div>
 				{ products }
 			</div>
