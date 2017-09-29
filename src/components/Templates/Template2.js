@@ -41,12 +41,12 @@ class Template2 extends Component {
 	} 
 
 	handleNext = () => {
-		const currentIndex = (this.state.currentIndex < this.props.data.userInput.products.length - 1 ) ? this.state.currentIndex + 1 : 0;
+		const currentIndex = (this.state.currentIndex < this.state.products.length - 1 ) ? this.state.currentIndex + 1 : 0;
 		this.setState({ currentIndex: currentIndex })
 	}
 
 	handlePrevious = () => {
-		const currentIndex = (this.state.currentIndex > 0 ) ? this.state.currentIndex - 1 : this.props.data.userInput.products.length - 1;	
+		const currentIndex = (this.state.currentIndex > 0 ) ? this.state.currentIndex - 1 : this.state.products.length - 1;	
 		this.setState({ currentIndex: currentIndex })	
 	}
 

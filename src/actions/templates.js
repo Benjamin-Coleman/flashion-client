@@ -85,6 +85,17 @@ export function saveCreateData(data, user_id, history) {
 	}
 }
 
+export function saveEditedLookbook(data, history) {
+	console.log(data, data.lookbookId)
+	return function(dispatch) {
+		const url = `http://localhost:3000/api/lookbooks/${data.lookbook._id}/edit`
+		axios.post(url, {...data})
+			.then(res => {
+				console.log(res)
+				dispatch({ type: "LOOKBOOK_UPDATED", payload: res})
+			})
+	}
+}
 
 
 

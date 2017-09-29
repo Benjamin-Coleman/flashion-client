@@ -9,7 +9,7 @@ const LookbookSchema = new Schema({
 	brandName: String,
 	collectionName: String,
 	products: [ProductSchema],
-	styles: [StylesSchema]
+	styles: {}
 })
 
 

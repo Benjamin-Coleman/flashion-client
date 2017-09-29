@@ -1,5 +1,5 @@
 .navbar {
-	height: 40px;
+	height: 50px;
 	background: #222;
 	display: flex;
 	align-items: center;
@@ -11,6 +11,7 @@
 	color: white;
 	font-size: 1.6em;
 	margin: 0;
+	padding: 0;
 }
 
 .nav-links a {
@@ -22,4 +23,5 @@
 	padding: 5px;
 	cursor: pointer;
 	letter-spacing: 2px;
+	font-weight: 700;
 }

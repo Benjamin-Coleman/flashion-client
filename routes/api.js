@@ -11,6 +11,26 @@ var Product = require('../models/product')
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
+router.post('/lookbooks/:id/edit', urlencodedParser, function(req, res) {
+	console.log('UPDATING LOOKBOOK', req.body)
+	// Lookbook.findByIdAndUpdate(req.params._id, { $set: {styles: {color1: 'req.body.customizations.color1'}}}, { new: true }, function(err, lb){
+	// 	if (err) return err;
+	// 	res.json({ success: 'updated'})
+	// })
+	Lookbook.findById(req.params.id, function(err, doc) {
+		console.log(req.params.id, '< ID', doc)
+		if (err) return err;
+		// doc.styles.push({ color1: req.body.customizations.color1})
+		doc.styles = {
+			color1: req.body.lookbook.styles.color1
+		}
+		doc.markModified('i dunno')
+		doc.save(function(err, lb){
+			if (err) return err;
+			res.json({ weDidIt: 'fam'})
+		})
+	})
+})
 
 router.post('/lookbooks/new', urlencodedParser, function(req, res) {
 	// var lookbook = req.body.data

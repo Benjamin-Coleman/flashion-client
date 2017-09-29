@@ -17,13 +17,13 @@ class TemplatesIndex extends Component {
 		const templateData = [
 			{
 				templateTitle: 'Template 1',
-				templateImage: 'http://placehold.it/250x200',
+				templateImage: '/assets/img/template_preview_1.gif',
 				templateDescription: 'This template is a static template with clean text and images. Best suited for small images.',
 				templateLink: '/templates/1/new',
 			},
 			{
 				templateTitle: 'Template 2',
-				templateImage: 'http://placehold.it/250x200',
+				templateImage: '/assets/img/template_preview_2.gif',
 				templateDescription: 'This template is a slideshow type thing for large images.',
 				templateLink: '/templates/2/new',
 			},
@@ -32,10 +32,14 @@ class TemplatesIndex extends Component {
 		const renderTemplatePreviews = templateData.map((x, index) => <TemplatePreview key={index} templateTitle={x.templateTitle} templateImage={x.templateImage} templateDescription={x.templateDescription} templateLink={x.templateLink}/> )
 
 		return (
-			<div className='page-wrapper templates'>
-				<h2>Templates</h2>
-				<div className='template-grid'>			
-					{ renderTemplatePreviews }
+			<div>
+		        <div style={{ paddingTop: '20px', paddingBottom: '30px'}} className="profile-header">
+					<h1>Templates</h1>
+		        </div>
+				<div className='page-wrapper templates'>
+					<div className='template-grid'>			
+						{ renderTemplatePreviews }
+					</div>
 				</div>
 			</div>
 			)

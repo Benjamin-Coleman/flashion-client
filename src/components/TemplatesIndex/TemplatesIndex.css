@@ -3,3 +3,16 @@
     flex-wrap: wrap;
     justify-content: space-around;
 }
+
+.template-preview img {
+	width: 100%;
+	height: auto;
+}
+
+.template-preview h3 {
+	text-transform: uppercase;
+	font-weight: 700;
+	letter-spacing: 3px;
+	font-size: 1em;
+	color: #555;
+}

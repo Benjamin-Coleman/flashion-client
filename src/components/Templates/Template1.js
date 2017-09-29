@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './Template1.css'
 import PreviewBar from '../PreviewBar/PreviewBar'
+import EditBar from '../EditBar/EditBar'
 import { fetchLookbook } from '../../actions/templates'
 import { fetchCustomizations } from '../../actions/templates'
 import { Route } from 'react-router-dom'
@@ -27,9 +28,12 @@ class Template1 extends Component {
 
 	onDrag = (color, c) => {
 		this.setState({
-			customizations: {
-				...this.state.customizations,
-				color1: color,
+			lookbook: {
+				...this.state.lookbook,
+				styles: {
+					...this.state.lookbook.styles,
+					color1: color,
+				}
 			}
 		})
 	}
@@ -45,12 +49,15 @@ class Template1 extends Component {
 
 	componentDidMount() {
 		if (this.props.match.url.includes('edit')){
-		this.setState({ editable: true})
+		this.setState({ editable: true}, this.addEditListeners())
 		}
 
 		//setup
 		this.tl = new TimelineMax()
-		this.addEditListeners()
+
+		if (this.state.editable){
+			this.addEditListeners()
+		}
 
 		const productCovers = document.querySelectorAll('.image-cover')
 		const infoBoxes = document.querySelectorAll('.template-1-product-info')
@@ -153,7 +160,7 @@ class Template1 extends Component {
 				<div className={index % 2 === 0 ? "template-1-product-row even" : "template-1-product-row"} key={index} >
 					<div className="product-img-wrap"><div className="image-cover"></div><img className={`product-image product-${index+1}`} src={product.imageURL} alt={product.name}/></div>
 					{this.state.editDialogues.productInfoColor ? <ColorPicker value={this.state.customizations.color1} onDrag={this.onDrag} /> : null}
-					<div className={index % 2 === 0 ? "template-1-product-info even" : "template-1-product-info"} style={{backgroundColor: this.state.customizations.color1 }}>
+					<div className={index % 2 === 0 ? "template-1-product-info even" : "template-1-product-info"} style={{backgroundColor: this.state.lookbook.styles.color1 }}>
 						<h3>{product.name}</h3>
 						<p>{product.description}</p>
 						{product.URL !== '' ? <a href={product.URL} className="primary-button template-1"><span>View On Site</span></a> : null}
@@ -162,7 +169,8 @@ class Template1 extends Component {
 				))
 		return (
 			<div style={{ background: 'white'}}>
-				<Route path='/lookbooks/preview' render={(props) => <PreviewBar {...props}/>}/>
+				<Route path='/lookbooks/preview' render={(props) => <PreviewBar {...props} />}/>
+				<Route path='/lookbooks/:id/edit' render={(props) => <EditBar {...props} templateState={this.state}/>}/>
 				<div className="template-1-header">
 					<h1 ref="brandName">{this.state.lookbook.brandName}</h1>
 					<h6>{this.state.lookbook.collectionName}</h6>

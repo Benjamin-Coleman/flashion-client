@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom'
 import './PreviewBar.css'
 
 class PreviewBar extends Component {
-
+	
 	// loggedIn = () => {
 	// 	return !!localStorage.getItem("jwt")
 	// }
@@ -28,6 +28,7 @@ class PreviewBar extends Component {
 		return (
 			<div className="preview-bar">
 				<div className="primary-button" onClick={this.handlePublishLookbook}>PUBLISH LOOKBOOK</div>
+
 			</div>
 			)
 	}
