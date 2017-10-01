@@ -23,7 +23,10 @@ router.post('/lookbooks/:id/edit', urlencodedParser, function(req, res) {
 		// doc.styles.push({ color1: req.body.customizations.color1})
 		doc.styles = {
 			color1: req.body.lookbook.styles.color1,
-			opacity: req.body.lookbook.styles.opacity
+			opacity: req.body.lookbook.styles.opacity,
+			imageGrayscale: req.body.lookbook.styles.imageGrayscale,
+			imageAppearDuration: req.body.lookbook.styles.imageAppearDuration,
+			infoAppearDuration: req.body.lookbook.styles.infoAppearDuration
 		}
 		doc.markModified('i dunno')
 		doc.save(function(err, lb){

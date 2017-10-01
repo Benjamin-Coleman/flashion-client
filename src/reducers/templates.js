@@ -1,12 +1,12 @@
 export default function reducer(state = {
  data: {
  	lookbook: {
-	brandName: '',
-	collectionName: '',
-	products: [],
-	template: 0,
-	_id: '',
-	styles: {},
+		brandName: '',
+		collectionName: '',
+		products: [],
+		template: 0,
+		_id: '',
+		styles: {},
 		}
 	}, 
 saveResponse: false }, action) {
@@ -18,8 +18,66 @@ saveResponse: false }, action) {
 		case "FETCH_LOOKBOOK":
 			console.log('fetching lb', action.payload)
 			return Object.assign({}, state, {data: action.payload.data})
-		// case "FETCH_CUSTOMIZATIONS":
-		// 	return Object.assign({}, state, {customizations: action.payload})
+		case "UPDATE_PRODUCT_OPACITY":
+			return Object.assign({}, state, {data: {
+				...state.data,
+				lookbook: {
+					...state.data.lookbook,
+				 styles: {
+				 	...state.data.lookbook.styles,
+				 	opacity: action.payload
+					 }
+					}
+				}
+			})
+		case "UPDATE_PRODUCT_COLOR":
+			return Object.assign({}, state, {data: {
+				...state.data,
+				lookbook: {
+					...state.data.lookbook,
+				 styles: {
+				 	...state.data.lookbook.styles,
+				 	color1: action.payload
+					 }
+					}
+				}
+			})
+		case "UPDATE_IMAGE_GRAYSCALE":
+			return Object.assign({}, state, {data: {
+				...state.data,
+				lookbook: {
+					...state.data.lookbook,
+				 styles: {
+				 	...state.data.lookbook.styles,
+				 	imageGrayscale: action.payload
+					 }
+					}
+				}
+			})
+			case "UPDATE_IMAGE_APPEAR_DURATION":
+			return Object.assign({}, state, {data: {
+				...state.data,
+				lookbook: {
+					...state.data.lookbook,
+				 styles: {
+				 	...state.data.lookbook.styles,
+				 	imageAppearDuration: action.payload
+					 }
+					}
+				}
+			})
+			case "UPDATE_INFO_APPEAR_DURATION":
+			return Object.assign({}, state, {data: {
+				...state.data,
+				lookbook: {
+					...state.data.lookbook,
+				 styles: {
+				 	...state.data.lookbook.styles,
+				 	infoAppearDuration: action.payload
+					 }
+					}
+				}
+			})
 		default:
 			return state
 	}

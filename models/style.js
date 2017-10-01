@@ -1,3 +1,5 @@
+// currently not in use. Use this if change to array of objects
+
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema, ObjectId = Schema.ObjectId
 

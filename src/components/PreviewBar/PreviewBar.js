@@ -17,6 +17,26 @@ class PreviewBar extends Component {
 	// 	}
 	// }
 
+	componentDidMount() {
+		window.addEventListener('scroll', this.handleScroll)
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener('scroll', this.handleScroll)
+	}
+
+	handleScroll = () => {
+		// const previewBar = document.querySelector('.preview-bar')
+		const appEl = document.querySelector('.App')
+
+		if (window.pageYOffset >= 50){
+			appEl.classList.add('fixed-bar')
+		}
+		if (window.pageYOffset < 50){
+			appEl.classList.remove('fixed-bar')
+		}
+	}
+
 	handlePublishLookbook = () => {
 		this.props.saveCreateData(this.props.data, this.props.auth.user.id, this.props.history)
 		console.log(this.props)
@@ -27,6 +47,7 @@ class PreviewBar extends Component {
 		console.log(this.props)
 		return (
 			<div className="preview-bar">
+				<div className="preview-message"><h6>Previewing Your Lookbook</h6></div>
 				<div className="primary-button" onClick={this.handlePublishLookbook}>PUBLISH LOOKBOOK</div>
 
 			</div>

@@ -228,8 +228,8 @@ updateImageState = (idx, data) => {
 						<h1>Template {this.state.templateId}</h1>
 					</div>
 					<form className="create-lookbook-form" onSubmit={this.handleSubmit}>
-						<div><input type='text' placeholder='Brand Name' value={this.state.userInput.brandName} onChange={this.changeBrandName} /></div>
-						<div><input type='text' placeholder='Collection Name' value={this.state.brandNameInput} onChange={this.changeCollectionName} /></div>
+						<div><input type='text' placeholder='Brand Name' value={this.state.userInput.brandName} onChange={this.changeBrandName} required /></div>
+						<div><input type='text' placeholder='Collection Name' value={this.state.brandNameInput} onChange={this.changeCollectionName} required /></div>
 
 						{this.state.userInput.products.map((product, idx) => (
 							// assigning key to index might cause issues if we allow users to change order

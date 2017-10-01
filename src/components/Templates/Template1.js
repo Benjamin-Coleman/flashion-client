@@ -3,7 +3,7 @@ import './Template1.css'
 import PreviewBar from '../PreviewBar/PreviewBar'
 import EditBar from '../EditBar/EditBar'
 import ControlPanel from '../ControlPanel/ControlPanel'
-import { fetchLookbook } from '../../actions/templates'
+import { fetchLookbook, updateProductOpacity, updateProductColor } from '../../actions/templates'
 import { Route } from 'react-router-dom'
 // import * as ScrollMagic from 'scrollmagic'
 import { TimelineMax, TweenMax, Expo } from 'gsap'
@@ -18,7 +18,7 @@ import { connect } from 'react-redux'
 class Template1 extends Component {
 
 	state = {
-		...this.props.data,
+		// ...this.props.data,
 		editDialogues: {
 			productInfoColor: false,
 			productInfoOpacity: false,
@@ -32,51 +32,26 @@ class Template1 extends Component {
 	}
 
 	onDrag = (color, c) => {
-		this.setState({
-			lookbook: {
-				...this.state.lookbook,
-				styles: {
-					...this.state.lookbook.styles,
-					color1: color,
-				}
-			}
-		})
+		this.props.updateProductColor(color)
 	}
 
 	onOpacitySlide = (e) => {
-		console.log(e)
-		this.setState({
-			lookbook: {
-				...this.state.lookbook,
-				styles: {
-					...this.state.lookbook.styles,
-					opacity: e
-				}
-			}
-		})
+		this.props.updateProductOpacity(e)
 	}
 
 	addEditListeners = () => {
-		console.log('setting up event listeners')
-		const productInfoBoxes = document.querySelectorAll('.template-1-product-info')
-		productInfoBoxes.forEach( box => {
-			box.addEventListener('click', () => {this.setState({editDialogues: {...this.state.editDialogues, productInfoColor: true}})})
-			box.addEventListener('click', () => {this.setState({editDialogues: {...this.state.editDialogues, productInfoOpacity: true}})})
-		})
-	}
-
-	componentWillReceiveProps(newProps){
-		// Needs to be fixed
-		// This checks that the stored template hasn't changed without updating state
-
-		if(newProps.data.lookbook !== this.props.data.lookbook){
-			this.setState({lookbook: newProps.data.lookbook })
-		}
+		// console.log('setting up event listeners')
+		// const productInfoBoxes = document.querySelectorAll('.template-1-product-info')
+		// productInfoBoxes.forEach( box => {
+		// 	box.addEventListener('click', () => {this.setState({editDialogues: {...this.state.editDialogues, productInfoColor: true}})})
+		// 	box.addEventListener('click', () => {this.setState({editDialogues: {...this.state.editDialogues, productInfoOpacity: true}})})
+		// })
 	}
 
 	componentDidMount() {
 		if (this.props.match.params.id){
-			const { lookbook } = this.props
+			// const { lookbook } = this.props
+			this.props.fetchLookbook(this.props.match.params.id)
 		}
 		if (this.props.match.url.includes('edit')){
 		this.setState({ editable: true}, this.addEditListeners())
@@ -94,9 +69,13 @@ class Template1 extends Component {
 
 		const finalOpacity = this.props.data.lookbook.styles.opacity / 100 || 1
 
+		const imageAppearDuration = this.props.data.lookbook.styles.imageAppearDuration || 1.5
+
+		const infoAppearDuration = this.props.data.lookbook.styles.infoAppearDuration || 1
+
 		this.tl
-		.add(TweenMax.staggerFromTo(productCovers, 1.5, {scaleX: 1}, {scaleX: 0, ease: Expo}, .7))
-		.add(TweenMax.staggerFromTo(infoBoxes, 1, {opacity: 0, x: 20}, {opacity: finalOpacity, x: 0, ease: Expo}, .3), .3, "-=0.3")
+		.add(TweenMax.staggerFromTo(productCovers, imageAppearDuration, {scaleX: 1}, {scaleX: 0, ease: Expo}, .7))
+		.add(TweenMax.staggerFromTo(infoBoxes, infoAppearDuration, {opacity: 0, x: 20}, {opacity: finalOpacity, x: 0, ease: Expo}, .3), .3, "-=0.3")
 
 		//this.tl.play()
 	}
@@ -185,19 +164,14 @@ class Template1 extends Component {
 
 
 	render() {
-		console.log(this.props)
-		console.log(this.state)
+		console.log('Template 1 Props: ', this.props)
+		console.log('Template 1 State: ', this.state)
 
-		const products = this.state.lookbook.products.map((product, index) => (
+		const products = this.props.data.lookbook.products.map((product, index) => (
 				<div className={index % 2 === 0 ? "template-1-product-row even" : "template-1-product-row"} key={index} >
-					<div className="product-img-wrap"><div className="image-cover"></div><img className={`product-image product-${index+1}`} src={product.imageURL} alt={product.name}/></div>
+					<div className="product-img-wrap"><div className="image-cover"></div><img style={{ filter: `grayscale(${this.props.data.lookbook.styles.imageGrayscale / 100})` }} className={`product-image product-${index+1}`} src={product.imageURL} alt={product.name}/></div>
 
-					<div className="product-info-dialogues">
-						{this.state.editDialogues.productInfoColor ? <ColorPicker value={this.state.customizations.color1} onDrag={this.onDrag} /> : null}
-						{this.state.editDialogues.productInfoOpacity ? <div style={{width: '500px', height: '100px', position: 'absolute'}}><Slider onChange={this.onOpacitySlide} defaultValue={100} /></div> : null}
-					</div>
-
-					<div className={index % 2 === 0 ? "template-1-product-info even" : "template-1-product-info"} style={{backgroundColor: this.state.lookbook.styles.color1, opacity: this.state.lookbook.styles.opacity || this.state.lookbook.styles.opacity === 0 ? this.state.lookbook.styles.opacity / 100 : 1}}>
+					<div className={index % 2 === 0 ? "template-1-product-info even" : "template-1-product-info"} style={{backgroundColor: this.props.data.lookbook.styles.color1, opacity: this.props.data.lookbook.styles.opacity || this.props.data.lookbook.styles.opacity === 0 ? this.props.data.lookbook.styles.opacity / 100 : 1}}>
 						<h3>{product.name}</h3>
 						<p>{product.description}</p>
 						{product.URL !== '' ? <a href={product.URL} className="primary-button template-1"><span>View On Site</span></a> : null}
@@ -206,13 +180,13 @@ class Template1 extends Component {
 				))
 		return (
 			<div style={{ background: 'white'}}>
-				<ControlPanel handleProductOpacityChange={this.onOpacitySlide} handleProductColorChange={this.onDrag} templateState={this.state}/>
+				{this.state.editable ? <ControlPanel /> : null }
 					<Route path='/lookbooks/preview' render={(props) => <PreviewBar {...props} />}/>
 					<Route path='/lookbooks/:id/edit' render={(props) => <EditBar {...props} templateState={this.state}/>}/>
 				<div className="template-1-wrapper">
 					<div className="template-1-header">
-						<h1 ref="brandName">{this.state.lookbook.brandName}</h1>
-						<h6>{this.state.lookbook.collectionName}</h6>
+						<h1 ref="brandName">{this.props.data.lookbook.brandName}</h1>
+						<h6>{this.props.data.lookbook.collectionName}</h6>
 					</div>
 					{ products }
 				</div>
@@ -227,6 +201,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
 	fetchLookbook: bindActionCreators(fetchLookbook, dispatch),
+	updateProductOpacity: bindActionCreators(updateProductOpacity, dispatch),
+	updateProductColor: bindActionCreators(updateProductColor, dispatch)
 	// fetchCustomizations: bindActionCreators(fetchCustomizations, dispatch)
 })
 

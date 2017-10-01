@@ -1,0 +1,60 @@
+.control-panel {
+	width: 700px;
+	height: 700px;
+	position: fixed;
+	right: 0;
+	top: 15%;
+	background: rgba(255,255,255,1);
+	z-index: 999;
+	border-top: 1px solid #dadada;
+	border-left: 1px solid #dadada;
+	border-bottom: 1px solid #dadada;
+	/*border-radius: 10px;*/
+	transform: translateX(650px);
+}	
+
+.control-panel h6 {
+	font-size: .9em;
+	letter-spacing: 8px;
+	text-transform: uppercase;
+	padding-left: 80px;
+	text-align: left;
+	margin: 0;
+	font-weight: 400;
+	color: #888;
+}
+
+.control-panel .sidebar-text {
+	position: absolute;
+	bottom: -55px;
+	transform: rotate(270deg);
+	transform-origin: left top;
+	padding-top: 15px;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	cursor: pointer;
+}
+
+.controls-wrapper {
+	margin-left: 60px;
+	height: 100%;
+	width: 100%;
+}
+
+.product-info-dialogues, .product-image-dialogues {
+	width: 100%;
+	height: auto;
+
+}
+
+.product-info-dialogues h2, .product-image-dialogues h2 {
+	color: #444;
+	font-weight: 200;
+}
+
+.product-info-dialogues h4, .product-image-dialogues h4{
+	color: #666;
+	text-transform: lowercase;
+	font-weight: 400;
+}

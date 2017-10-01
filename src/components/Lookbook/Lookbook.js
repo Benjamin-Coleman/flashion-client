@@ -9,6 +9,8 @@ import Template2 from '../Templates/Template2'
 class Lookbook extends Component {
 
 	componentDidMount = () => {
+		// scroll window to top to compensate for long forms
+		window.scrollTo(0, 0);
 		if (this.props.match.params.id){
 			this.props.fetchLookbook(this.props.match.params.id)
 		}
