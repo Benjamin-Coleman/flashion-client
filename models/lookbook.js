@@ -10,7 +10,7 @@ const LookbookSchema = new Schema({
 	collectionName: String,
 	products: [ProductSchema],
 	styles: {}
-})
+}, { minimize: false })
 
 
 module.exports = mongoose.model('Lookbook', LookbookSchema)

@@ -10,7 +10,7 @@ import './Create.css'
 class Create extends Component {
 
 	state = {
-		templateId: parseInt(this.props.match.params.id),
+		templateId: parseInt(this.props.match.params.id, 10),
 		userInput: {
 			brandName: '',
 			collectionName: '',
@@ -35,7 +35,8 @@ class Create extends Component {
 				brandName: this.state.userInput.brandName,
 				collectionName: this.state.userInput.collectionName,
 				products: this.state.userInput.products,
-				template: this.state.templateId
+				template: this.state.templateId,
+				styles: {}
 			}
 		})
 	}
@@ -181,7 +182,7 @@ class Create extends Component {
       headers: { "X-Requested-With": "XMLHttpRequest" },
     }).then(response => {
       const data = response.data;
-      const fileURL = data.secure_url // You should store this URL for future references in your app
+      // const fileURL = data.secure_url // You should store this URL for future references in your app
       console.log(data);
 	    this.updateImageState(idx, data)
     })
@@ -251,7 +252,7 @@ updateImageState = (idx, data) => {
 								<p style={{ color: '#9a9aa6', textTransform: 'uppercase', fontWeight: '200', fontSize: '14px', letterSpacing: '1px'}}>Drop your file or click here to upload</p>
 								</Dropzone>
 								<div className="img-preview">
-									{product.imageURL !== '' ? <img src={product.imageURL} />: null}
+									{product.imageURL !== '' ? <img src={product.imageURL} alt={product.name} />: null}
 								</div>
 								</div>
 							</div>

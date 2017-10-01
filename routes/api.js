@@ -22,7 +22,8 @@ router.post('/lookbooks/:id/edit', urlencodedParser, function(req, res) {
 		if (err) return err;
 		// doc.styles.push({ color1: req.body.customizations.color1})
 		doc.styles = {
-			color1: req.body.lookbook.styles.color1
+			color1: req.body.lookbook.styles.color1,
+			opacity: req.body.lookbook.styles.opacity
 		}
 		doc.markModified('i dunno')
 		doc.save(function(err, lb){
@@ -40,7 +41,7 @@ router.post('/lookbooks/new', urlencodedParser, function(req, res) {
 		brandName: req.body.data.lookbook.brandName,
 		collectionName: req.body.data.lookbook.collectionName,
 		products: req.body.data.lookbook.products,
-		styles: req.body.data.lookbook.customizations
+		styles: req.body.data.lookbook.styles
 	})
 	newLookbook.save().then(function() {
 		User.findOne({ _id: req.body.user}).then(function(record){

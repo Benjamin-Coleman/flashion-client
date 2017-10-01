@@ -11,6 +11,7 @@ class LookbookPreview extends Component {
 				<h6>{this.props.collectionName}</h6>
 				<img src={this.props.templateThumbnail} alt={this.props.brandName} />
 				<Link to={`/lookbooks/${this.props.lookbookId}`} className='primary-button'>Visit Lookbook</Link>
+				<Link to={`/lookbooks/${this.props.lookbookId}/edit`} className='primary-button'>Edit Lookbook</Link>
 			</div>
 			)
 	}

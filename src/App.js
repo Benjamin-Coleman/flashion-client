@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 // import { CSSTransitionGroup } from 'react-transition-group'
 // import TransitionGroup from 'react-transition-group/TransitionGroup';
@@ -15,6 +15,8 @@ import Signup from './components/Signup/Signup'
 import Login from './components/Login/Login'
 import Profile from './components/Profile/Profile'
 import About from './components/About/About'
+import NotFound from './components/NotFound/NotFound'
+
 import { getUserData } from './actions/auth'
 import { screenResize } from './actions'
 // import { AnimatedWrapper, TestComponent } from './AnimatedWrapper'
@@ -38,6 +40,7 @@ class App extends Component {
     return (
       <div className="App">
         <Route path='/' component={ NavBar } />
+        <Switch>
           <Route exact path="/" component={ Home } />
           <Route exact path="/about" component={ About } />
           <Route exact path="/signup" component={ Signup } />
@@ -48,6 +51,8 @@ class App extends Component {
           <Route exact path="/lookbooks/:id" component={ Lookbook } />
           <Route exact path="/lookbooks/:id/edit" component={ Lookbook } />
           <Route exact path="/profile" component={ Profile } />
+          <Route component={ NotFound } />
+        </Switch>
       </div>
     );
   }

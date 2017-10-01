@@ -5,7 +5,8 @@ export default function reducer(state = {
 	collectionName: '',
 	products: [],
 	template: 0,
-	_id: ''
+	_id: '',
+	styles: {},
 		}
 	}, 
 saveResponse: false }, action) {

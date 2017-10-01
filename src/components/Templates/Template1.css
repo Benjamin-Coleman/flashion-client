@@ -2,6 +2,11 @@
 	overflow: hidden
 }
 
+.template-1-wrapper {
+	max-width: 1300px;
+	margin: 0 auto;
+}
+
 .template-1-header h1 {
 	font-size: 4em;
 	padding-left: 3em;
