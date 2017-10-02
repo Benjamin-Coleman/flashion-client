@@ -26,7 +26,8 @@ router.post('/lookbooks/:id/edit', urlencodedParser, function(req, res) {
 			opacity: req.body.lookbook.styles.opacity,
 			imageGrayscale: req.body.lookbook.styles.imageGrayscale,
 			imageAppearDuration: req.body.lookbook.styles.imageAppearDuration,
-			infoAppearDuration: req.body.lookbook.styles.infoAppearDuration
+			infoAppearDuration: req.body.lookbook.styles.infoAppearDuration,
+			fontFamily: req.body.lookbook.styles.fontFamily
 		}
 		doc.markModified('i dunno')
 		doc.save(function(err, lb){

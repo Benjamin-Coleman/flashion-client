@@ -77,6 +77,18 @@ saveResponse: false }, action) {
 					 }
 					}
 				}
+			})			
+			case "UPDATE_FONT_FAMILY":
+			return Object.assign({}, state, {data: {
+				...state.data,
+				lookbook: {
+					...state.data.lookbook,
+				 styles: {
+				 	...state.data.lookbook.styles,
+				 	fontFamily: action.payload
+					 }
+					}
+				}
 			})
 		default:
 			return state

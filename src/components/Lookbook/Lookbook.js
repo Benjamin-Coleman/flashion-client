@@ -25,7 +25,7 @@ class Lookbook extends Component {
 		case 1:
 			return <Template1 match={this.props.match}/>
 		case 2:
-			return <Template2 />
+			return <Template2 match={this.props.match}/>
 		default:
 			return <div>Something went wrong</div>
 		}

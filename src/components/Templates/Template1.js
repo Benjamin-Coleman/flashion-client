@@ -7,10 +7,6 @@ import { fetchLookbook, updateProductOpacity, updateProductColor } from '../../a
 import { Route } from 'react-router-dom'
 // import * as ScrollMagic from 'scrollmagic'
 import { TimelineMax, TweenMax, Expo } from 'gsap'
-import ColorPicker from 'react-color-picker'
-import Slider from 'rc-slider'
-import 'react-color-picker/index.css'
-import 'rc-slider/assets/index.css'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -54,7 +50,7 @@ class Template1 extends Component {
 			this.props.fetchLookbook(this.props.match.params.id)
 		}
 		if (this.props.match.url.includes('edit')){
-		this.setState({ editable: true}, this.addEditListeners())
+		this.setState({ editable: true})
 		}
 
 		//setup

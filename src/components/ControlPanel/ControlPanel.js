@@ -3,7 +3,7 @@ import './ControlPanel.css'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { updateProductOpacity, updateProductColor, updateImageGrayscale, updateImageAppearDuration, updateInfoAppearDuration } from '../../actions/templates'
+import { updateProductOpacity, updateProductColor, updateImageGrayscale, updateImageAppearDuration, updateInfoAppearDuration, updateFontFamily } from '../../actions/templates'
 import ColorPicker from 'react-color-picker'
 import Slider from 'rc-slider'
 import 'react-color-picker/index.css'
@@ -49,7 +49,7 @@ class ControlPanel extends Component {
 							<div style={{ padding: '10px'}}>
 								<h4>Opacity</h4>
 								<h4 style={{ marginBottom: '0'}}>{this.props.data.lookbook.styles.opacity || 100}%</h4>
-								<div style={{width: '250px'}}>
+								<div style={{ width: '250px' }}>
 									<Slider trackStyle={{ 
 											background: 'linear-gradient(315deg, #929BEF 0%, #63E2FF 100%)', 
 											height: 10 
@@ -57,11 +57,23 @@ class ControlPanel extends Component {
 										handleStyle={{
 											height: 20,
 											width: 20,
-
 										}}
 										onChange={this.props.updateProductOpacity} defaultValue={100} 
 									/>
 								</div>
+								{this.props.data.lookbook.template === 2 ? 
+									<div>
+										<h4 style={{ fontFamily: `${this.props.data.lookbook.styles.fontFamily || 'Avenir, sans-serif'}`}}>Font Family: {this.props.data.lookbook.styles.fontFamily || 'Playfair Display'}</h4>
+										<div style={{ width: '250px'}}>
+											<select onChange={this.props.updateFontFamily}>
+												<option style={{ fontFamily: 'Playfair Display'}} value="Playfair Display">Playfair Display</option>
+												<option style={{ fontFamily: 'Avenir'}} value="Avenir">Avenir</option>
+												<option style={{ fontFamily: 'Josefin Slab'}} value="Josefin Slab">Josefin Slab</option>
+												<option style={{ fontFamily: 'Poppins'}} value="Poppins">Poppins</option>
+											</select>
+										</div>
+									</div>
+									: null}
 							</div>
 						</div>
 					</div>
@@ -81,7 +93,7 @@ class ControlPanel extends Component {
 											width: 20,
 
 										}}
-										onChange={this.props.updateImageGrayscale } 
+										onChange={ this.props.updateImageGrayscale } 
 										defaultValue={0} 
 									/>
 								</div>
@@ -95,7 +107,7 @@ class ControlPanel extends Component {
 							<div style={{ padding: '10px'}}>
 								<h4>Image Appear Duration</h4>
 								<h4 style={{ marginBottom: '0'}}>{this.props.data.lookbook.styles.imageAppearDuration}s</h4>
-								<div style={{width: '250px'}}>
+								<div style={{ width: '250px' }}>
 									<Slider 
 										trackStyle={{ 
 											background: 'linear-gradient(315deg, #929BEF 0%, #63E2FF 100%)', 
@@ -106,18 +118,18 @@ class ControlPanel extends Component {
 											width: 20,
 
 										}}
-										onChange={this.props.updateImageAppearDuration } 
-										defaultValue={this.props.data.lookbook.styles.imageAppearDuration} 
+										onChange={ this.props.updateImageAppearDuration } 
+										defaultValue={ this.props.data.lookbook.styles.imageAppearDuration || 1.5 } 
 										step={0.1}
 										min={0}
 										max={5}
 									/>
 								</div>
 							</div>
-							<div style={{ padding: '10px'}}>
+							<div style={{ padding: '10px' }}>
 								<h4>Info Appear Duration</h4>
 								<h4 style={{ marginBottom: '0'}}>{this.props.data.lookbook.styles.infoAppearDuration || 1}s</h4>
-								<div style={{width: '250px'}}>
+								<div style={{ width: '250px' }}>
 									<Slider 
 										trackStyle={{ 
 											background: 'linear-gradient(315deg, #929BEF 0%, #63E2FF 100%)', 
@@ -126,9 +138,8 @@ class ControlPanel extends Component {
 										handleStyle={{
 											height: 20,
 											width: 20,
-
 										}}
-										onChange={this.props.updateInfoAppearDuration } 
+										onChange={ this.props.updateInfoAppearDuration } 
 										defaultValue={1} 
 										step={0.1}
 										min={0}
@@ -153,7 +164,8 @@ const mapDispatchToProps = dispatch => ({
 	updateProductColor: bindActionCreators(updateProductColor, dispatch),
 	updateImageGrayscale: bindActionCreators(updateImageGrayscale, dispatch),
 	updateImageAppearDuration: bindActionCreators(updateImageAppearDuration, dispatch),
-	updateInfoAppearDuration: bindActionCreators(updateInfoAppearDuration, dispatch)
+	updateInfoAppearDuration: bindActionCreators(updateInfoAppearDuration, dispatch),
+	updateFontFamily: bindActionCreators(updateFontFamily, dispatch),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ControlPanel)

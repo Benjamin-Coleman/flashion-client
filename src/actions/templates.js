@@ -86,6 +86,11 @@ export function updateInfoAppearDuration(data) {
 	return { type: "UPDATE_INFO_APPEAR_DURATION", payload: data}
 }
 
+export function updateFontFamily(e) {
+	const data = e.target.value
+	return { type: "UPDATE_FONT_FAMILY", payload: data}
+}
+
 
 
 
