@@ -5,7 +5,6 @@ import ControlPanel from '../ControlPanel/ControlPanel'
 import EditBar from '../EditBar/EditBar'
 import { fetchLookbook } from '../../actions/templates'
 import { Route } from 'react-router-dom'
-import { TimelineMax, TweenMax } from 'gsap'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -17,7 +16,7 @@ class Template2 extends Component {
 		editable: false,
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		if (this.props.match.params.id){
 			this.props.fetchLookbook(this.props.match.params.id)
 		}
@@ -25,21 +24,6 @@ class Template2 extends Component {
 			this.setState({ editable: true})
 		}
 		this.addListerners()
-
-		// intro timeline
-
-		// this.tl = new TimelineMax()
-
-		// const headerEl = document.querySelector('.template-2-header')
-		// //should grab first info box, rest don't matter
-		// const infoBoxEl = document.querySelector('.template-2-product-info')
-		// const controlsEl = document.querySelector('.template-2-controls')
-
-		// this.tl
-		// .add(TweenMax.set(headerEl, {y: - 50}))
-		// .add(TweenMax.set(productCovers, imageAppearDuration, {scaleX: 1}, {scaleX: 0, ease: Expo}, .7))
-		// .add(TweenMax.staggerFromTo(infoBoxes, infoAppearDuration, {opacity: 0, x: 20}, {opacity: finalOpacity, x: 0, ease: Expo}, .3), .3, "-=0.3")
-
 	}
 
 	componentWillUnmount() {
@@ -82,7 +66,7 @@ class Template2 extends Component {
 				<div className={index === this.state.currentIndex ? "template-2-product-wrapper active" : "template-2-product-wrapper"} key={index}>
 					
 					<img src={product.imageURL} alt={product.name} style={{ filter: `grayscale(${this.props.data.lookbook.styles.imageGrayscale / 100})`, transitionProperty: 'transform', transitionDuration: `${this.props.data.lookbook.styles.imageAppearDuration + 's' || '1.3s'}`}}/>
-					<div className="template-2-product-info">
+					<div className="template-2-product-info" style={{ backgroundColor: this.props.data.lookbook.styles.color1 }}>
 						<h3 style={{ fontFamily: `${this.props.data.lookbook.styles.fontFamily || 'Playfair Display, serif'}`}}>{product.name}</h3>
 						<p style={{ fontFamily: `${this.props.data.lookbook.styles.fontFamily || 'Playfair Display, serif'}`}}>{product.description}</p>
 						{product.URL !== '' ? <a href={product.URL} className="primary-button template-2"><span>View On Site</span></a> : null}
@@ -106,7 +90,7 @@ class Template2 extends Component {
 							</div>
 						</div>
 						<div className="template-2-header">
-							<h1 style={{ fontFamily: `${this.props.data.lookbook.styles.fontFamily || 'Playfair Display, serif'}`}}>{this.props.data.lookbook.brandName}</h1>
+							<h1 style={{ fontFamily: `${this.props.data.lookbook.styles.fontFamily || 'Playfair Display, serif'}`, backgroundColor: this.props.data.lookbook.styles.color1 }}>{this.props.data.lookbook.brandName}</h1>
 							<h6 style={{ fontFamily: `${this.props.data.lookbook.styles.fontFamily || 'Playfair Display, serif'}`}}>{this.props.data.lookbook.collectionName}</h6>
 						</div>
 					<div className="template-2-products-wrapper">

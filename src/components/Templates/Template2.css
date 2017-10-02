@@ -143,7 +143,7 @@
     padding: 25px;
     min-width: 50%;
     opacity: 0;
-    transition: all 500ms ease-in-out;
+    transition: opacity 500ms ease-in-out;
 }
 
 .template-2-product-wrapper.active .template-2-product-info{
