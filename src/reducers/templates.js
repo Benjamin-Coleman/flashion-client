@@ -90,6 +90,56 @@ saveResponse: false }, action) {
 					}
 				}
 			})
+			case "UPDATE_PRODUCT_INFO_POSITION":
+			function updateProducts(products, updatingIndex, positionX, positionY) {
+				return products.map( (product, index) => {
+					// this is comparing number versus string 
+					if(index != updatingIndex){
+						return product
+					}
+
+					return {
+						...product,
+						infoPositionX: positionX,
+						infoPositionY: positionY
+					}
+				})
+			}
+
+			const updatedInfoPositionProducts = updateProducts(state.data.lookbook.products, action.index, action.posX, action.posY)
+			console.log("** UPDATED POSITIONS", updatedInfoPositionProducts)
+			return Object.assign({}, state, {data: {
+				...state.data,
+				lookbook: {
+					...state.data.lookbook,
+				 products: [...updatedInfoPositionProducts]
+					}
+				}
+			})
+			case "UPDATE_PRODUCT_IMAGE_POSITION":
+			function updateProducts(products, updatingIndex, position) {
+				return products.map( (product, index) => {
+					// this is comparing number versus string 
+					if(index != updatingIndex){
+						return product
+					}
+
+					return {
+						...product,
+						imagePositionX: position
+					}
+				})
+			}
+
+			const updatedImagePositionProducts = updateProducts(state.data.lookbook.products, action.index, action.pos)
+			return Object.assign({}, state, {data: {
+				...state.data,
+				lookbook: {
+					...state.data.lookbook,
+				 products: [...updatedImagePositionProducts]
+					}
+				}
+			})
 		default:
 			return state
 	}

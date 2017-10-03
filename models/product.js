@@ -5,7 +5,10 @@ const ProductSchema = new Schema({
 	imageURL: String,
 	description: String,
 	URL: String,
-	name: String
+	name: String,
+	imagePositionX: { type: Number, default: 0 },
+	infoPositionX: { type: Number, default: 0 },
+	infoPositionY: { type: Number, default: 0 }
 })
 
 // just export schema

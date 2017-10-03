@@ -3,11 +3,10 @@ import './Template1.css'
 import PreviewBar from '../PreviewBar/PreviewBar'
 import EditBar from '../EditBar/EditBar'
 import ControlPanel from '../ControlPanel/ControlPanel'
-import { fetchLookbook, updateProductOpacity, updateProductColor } from '../../actions/templates'
+import { fetchLookbook, updateProductOpacity, updateProductColor, updateProductImagePosition, updateProductInfoPosition } from '../../actions/templates'
 import { Route } from 'react-router-dom'
-// import * as ScrollMagic from 'scrollmagic'
-import { TimelineMax, TweenMax, Expo } from 'gsap'
-
+import { TimelineMax, TweenMax, Expo, Power2 } from 'gsap'
+import Draggable from 'react-draggable'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
@@ -50,7 +49,14 @@ class Template1 extends Component {
 			this.props.fetchLookbook(this.props.match.params.id)
 		}
 		if (this.props.match.url.includes('edit')){
-		this.setState({ editable: true})
+		this.setState({ editable: true}, 
+			function() {
+				const draggableNotificationTL = new TimelineMax()
+				draggableNotificationTL
+					.to(this.refs.draggableNotification, 1, {opacity: 1, y: 0, ease: Power2.easeOut}, 0)
+					.to(this.refs.draggableNotification, 1, {opacity: 0, y: -30, ease: Power2.easeOut}, 5)
+			}
+		)
 		}
 
 		//setup
@@ -71,93 +77,18 @@ class Template1 extends Component {
 
 		this.tl
 		.add(TweenMax.staggerFromTo(productCovers, imageAppearDuration, {scaleX: 1}, {scaleX: 0, ease: Expo}, .7))
-		.add(TweenMax.staggerFromTo(infoBoxes, infoAppearDuration, {opacity: 0, x: 20}, {opacity: finalOpacity, x: 0, ease: Expo}, .3), .3, "-=0.3")
+		.add(TweenMax.staggerFromTo(infoBoxes, infoAppearDuration, {opacity: 0}, {opacity: finalOpacity, ease: Expo}, .3), .3, "-=0.3")
 
 		//this.tl.play()
 	}
 
-	// 	constructor(props){
+	handleProductImageDrag = (e, data) => {
+		this.props.updateProductImagePosition(e, data)
+	}
 
- //        super(props);
-
- //        this.edge = 0;
- //        this.active = false;
-
-	// 	this.easedScroll = 0;
-	// 	this.scroll = 0;
-	// 	this.scrollY = 0;
-	// 	this.animatedElmts = [];
-
-	// 	this.documentHeight = -1;
-
- //    }
-
-	// componentDidMount() {
-	// 	window.addEventListener('scroll', this.scrollUpdate)
-	// 	// this.bindEvents()
-	// 	this.setTimeLines()
-
-	// 	// bindEvents() {
-	// 	// 	this.update = (e) => 
-	// 	// }
-	// }
-
-	// componentWillUnmount() {
-	// 	window.removeEventListener('scroll', this.handleScroll)
-	// }
-
- //    scrollUpdate = () => {
-	// 	const scrollY = window.scrollY;
-	// 	const before = scrollY < this.top;
-	// 	const after = scrollY > this.bottom;
- //    	console.log(window.scrollY, scrollY)
-
-	// 	if(scrollY <= this.height && scrollY >= 100) {
-	// 		if (scrollY !== this.scrollY) {
-	// 			console.log('onscroll');
-
-	// 			this.scroll = scrollY / this.height;
-
-	// 			this.scrollTween = new TweenLite(this, 1, {
-	// 				easedScroll: this.scroll,
-	// 				ease: 'Power2',
-	// 				onUpdate: () => this.updateScroll()
-	// 			});
-
-	// 			this.scrollY = scrollY;
-	// 		}
-
-	// 	}
-	// }
-
-	// setTimeLines() {
-	// 	console.log('setting up timelines')
-
-	// 	this.mainTL && delete this.mainTL;
-
-	// 	this.mainTL = new TimelineLite()
-	// 	this.mainTL.stop();
-
-	// 	const timeline = new TimelineLite()
-
-	// 	const products = document.querySelectorAll('.product-image')
-
-	// 	timeline
-	// 	.from(products, 5, {
-	// 		y: -200,
-	// 		ease: 'Power2'
-	// 	})
-
-	// 	this.mainTL.add(timeline, 0)
-	// }
-
-
-	// updateScroll() {
-
-	// 	this.mainTL.progress(this.easedScroll);
-
-	// }
-
+	handleProductInfoDrag = (e, data) => {
+		this.props.updateProductInfoPosition(e, data)
+	}
 
 	render() {
 		console.log('Template 1 Props: ', this.props)
@@ -165,17 +96,21 @@ class Template1 extends Component {
 
 		const products = this.props.data.lookbook.products.map((product, index) => (
 				<div className={index % 2 === 0 ? "template-1-product-row even" : "template-1-product-row"} key={index} >
-					<div className="product-img-wrap"><div className="image-cover"></div><img style={{ filter: `grayscale(${this.props.data.lookbook.styles.imageGrayscale / 100})` }} className={`product-image product-${index+1}`} src={product.imageURL} alt={product.name}/></div>
-
-					<div className={index % 2 === 0 ? "template-1-product-info even" : "template-1-product-info"} style={{backgroundColor: this.props.data.lookbook.styles.color1, opacity: this.props.data.lookbook.styles.opacity || this.props.data.lookbook.styles.opacity === 0 ? this.props.data.lookbook.styles.opacity / 100 : 1}}>
+					<Draggable bounds='parent' disabled={!this.state.editable} onDrag={this.handleProductImageDrag} position={{x: product.imagePositionX, y: 0}} axis='x' >
+					<div className="product-img-wrap"><div className="image-cover"></div><img data-product-index={index} draggable="false" style={{ filter: `grayscale(${this.props.data.lookbook.styles.imageGrayscale / 100})`, cursor: this.state.editable ? '-webkit-grab' : 'auto' }} className={`product-image product-${index+1}`} src={product.imageURL} alt={product.name}/></div>
+					</Draggable>
+					<Draggable bounds='parent' disabled={!this.state.editable} onDrag={this.handleProductInfoDrag} position={{x: product.infoPositionX, y: product.infoPositionY}}>
+					<div data-product-index={index} className={index % 2 === 0 ? "template-1-product-info even" : "template-1-product-info"} style={{backgroundColor: this.props.data.lookbook.styles.color1, opacity: this.props.data.lookbook.styles.opacity || this.props.data.lookbook.styles.opacity === 0 ? this.props.data.lookbook.styles.opacity / 100 : 1, cursor: this.state.editable ? '-webkit-grab' : 'auto'}}>
 						<h3>{product.name}</h3>
 						<p>{product.description}</p>
 						{product.URL !== '' ? <a href={product.URL} className="primary-button template-1"><span>View On Site</span></a> : null}
 					</div>
+					</Draggable>
 				</div>
 				))
 		return (
 			<div style={{ background: 'white'}}>
+				<div className="draggable-notification" ref="draggableNotification"><h6>Drag To Elements to Reposition</h6></div>
 				{this.state.editable ? <ControlPanel /> : null }
 					<Route path='/lookbooks/preview' render={(props) => <PreviewBar {...props} />}/>
 					<Route path='/lookbooks/:id/edit' render={(props) => <EditBar {...props} templateState={this.state}/>}/>
@@ -198,7 +133,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
 	fetchLookbook: bindActionCreators(fetchLookbook, dispatch),
 	updateProductOpacity: bindActionCreators(updateProductOpacity, dispatch),
-	updateProductColor: bindActionCreators(updateProductColor, dispatch)
+	updateProductColor: bindActionCreators(updateProductColor, dispatch),
+	updateProductImagePosition: bindActionCreators(updateProductImagePosition, dispatch),
+	updateProductInfoPosition: bindActionCreators(updateProductInfoPosition, dispatch)
 	// fetchCustomizations: bindActionCreators(fetchCustomizations, dispatch)
 })
 

@@ -21,6 +21,7 @@ router.post('/lookbooks/:id/edit', urlencodedParser, function(req, res) {
 		console.log(req.params.id, '< ID', doc)
 		if (err) return err;
 		// doc.styles.push({ color1: req.body.customizations.color1})
+		doc.products = req.body.lookbook.products
 		doc.styles = {
 			color1: req.body.lookbook.styles.color1,
 			opacity: req.body.lookbook.styles.opacity,

@@ -91,6 +91,17 @@ export function updateFontFamily(e) {
 	return { type: "UPDATE_FONT_FAMILY", payload: data}
 }
 
+export function updateProductInfoPosition(e, data) {
+	const index = data.node.dataset.productIndex
+	console.log('PRODUCT INFO data: ', data)
+	const posX = data.lastX
+	const posY = data.lastY
+	return { type: "UPDATE_PRODUCT_INFO_POSITION", index: index, posX: posX, posY: posY}
+}
 
-
+export function updateProductImagePosition(e, data) {
+	const index = data.node.lastChild.dataset.productIndex
+	const pos = data.lastX
+	return { type: "UPDATE_PRODUCT_IMAGE_POSITION", index: index, pos: pos}
+}
 
