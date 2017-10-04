@@ -8,4 +8,36 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    position: relative;
+}
+
+.delete-button {
+	position: absolute;
+	left: 0;
+	top: 0;
+	padding: 5px;
+	cursor: pointer;
+}
+
+.delete-button h3 {
+	padding: 0;
+	margin: 0;
+	color: #ccc;
+	font-weight: 200;
+}
+
+.lookbook-preview h3 {
+	color: #686870;
+	font-weight: 400;
+	margin-bottom: 10px;
+}
+
+.lookbook-preview h6 {
+	width: 100%;
+	text-align: center;
+	margin: 5px 0;
+	font-weight: 700;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	color: #5c5d5f;
 }

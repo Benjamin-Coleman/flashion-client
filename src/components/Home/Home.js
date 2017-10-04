@@ -21,7 +21,7 @@ class Home extends Component {
 						<div className='hero-content'>
 						<h1>Create your collection</h1>
 						<p>
-							Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+						Giving small fashion brands the power to show off their new collections. Pick your template, upload your images and descriptions and then customize your template to fit your style and your brand's aethetic. Create a page to send out to your customers and promotional sites to get the word out about your work.
 						</p>
 						<Link to='/templates'><div className='primary-button'><span>View Templates</span></div></Link>
 						</div>

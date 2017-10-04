@@ -25,6 +25,12 @@ class Create extends Component {
 		}
 	}
 
+	componentDidMount() {
+		if(!localStorage.getItem('jwt')){
+			this.props.history.push('/login')
+		}
+	}
+
 	handleSubmit = (e) => {
 		e.preventDefault()
 		const sanitizedBrandName = this.state.userInput.brandName.split(' ').join('-').toLowerCase()

@@ -16,6 +16,7 @@ import Login from './components/Login/Login'
 import Profile from './components/Profile/Profile'
 import About from './components/About/About'
 import NotFound from './components/NotFound/NotFound'
+import AccessDenied from './components/AccessDenied/AccessDenied'
 
 import { getUserData } from './actions/auth'
 import { screenResize } from './actions'
@@ -51,6 +52,7 @@ class App extends Component {
           <Route exact path="/lookbooks/:id" component={ Lookbook } />
           <Route exact path="/lookbooks/:id/edit" component={ Lookbook } />
           <Route exact path="/profile" component={ Profile } />
+          <Route exact path="/access-denied" component={ AccessDenied } />
           <Route component={ NotFound } />
         </Switch>
       </div>

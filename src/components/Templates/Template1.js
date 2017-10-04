@@ -49,6 +49,7 @@ class Template1 extends Component {
 			this.props.fetchLookbook(this.props.match.params.id)
 		}
 		if (this.props.match.url.includes('edit')){
+			// check if the correct user
 		this.setState({ editable: true}, 
 			function() {
 				const draggableNotificationTL = new TimelineMax()

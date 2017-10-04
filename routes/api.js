@@ -18,7 +18,6 @@ router.post('/lookbooks/:id/edit', urlencodedParser, function(req, res) {
 	// 	res.json({ success: 'updated'})
 	// })
 	Lookbook.findById(req.params.id, function(err, doc) {
-		console.log(req.params.id, '< ID', doc)
 		if (err) return err;
 		// doc.styles.push({ color1: req.body.customizations.color1})
 		doc.products = req.body.lookbook.products
@@ -40,7 +39,6 @@ router.post('/lookbooks/:id/edit', urlencodedParser, function(req, res) {
 
 router.post('/lookbooks/new', urlencodedParser, function(req, res) {
 	// var lookbook = req.body.data
-	console.log(req.body)
 	var newLookbook = new Lookbook({
 		template: req.body.data.lookbook.template,
 		brandName: req.body.data.lookbook.brandName,
@@ -69,6 +67,60 @@ router.post('/lookbooks/new', urlencodedParser, function(req, res) {
 
 })
 
+router.post('/lookbooks/:id/delete', function(req, res) {
+	const lookbookId = req.params.id
+	console.log('USER', req.body.userId, 'LOOKBOOKID', lookbookId)
+
+	User.findOne({ _id: req.body.userId}).then(function(record){
+		console.log(record)
+		console.log(record.local.lookbooks.id('59d4efacccb91e34cf1d0e2b'));
+		record.local.lookbooks.id('59d4efacccb91e34cf1d0e2b').remove()
+		record.save()
+		res.json({success: 'yeeee'})
+	})
+
+	// Lookbook.findByIdAndRemove(lookbookId).then(res.json({ removed: 'removed the lookbook with remove method'}))
+	// User.findOne({ _id: req.body.userId}).then(function(record){
+	// 	console.log(record)
+	// 	record.save()
+	// })
+
+	// Lookbook.findByIdAndRemove(lookbookId).then(User.findOne({ _id: req.body.user}).then(function(record){
+	// 		record.local.lookbooks.pull({ _id: lookbookId })
+	// 		record.save().then(function(x){
+	// 			res.json(record)
+	// 		})
+			
+	// 	})
+	// )
+
+	// User.findOne({ _id: req.body.userId}).then(function(record){
+	// 	console.log(record)
+	// 		record.local.lookbooks.pull({ _id: lookbookId})
+	// 		record.save(function(err, data){
+	// 			if (err) console.log(err);
+	// 		})
+	// 		res.json({ record })
+	// 	})
+
+	// User.findOne({ _id: req.body.userId}).then(function(record){
+	// 	console.log(record)
+	// 	record.local.lookbooks.id(lookbookId).remove()
+	// 	record.save(function(err) {
+	// 		if (err) {console.log('!&@#($!&@#$(!&@#$(!@#&$(')};
+	// 		console.log('removed********')
+	// 	})
+	// }).then(res.json({success: 'ajskdlfjadsf'}))
+	// User.findByIdAndUpdate(req.body.userId, {
+ //  $pull: {
+ //    lookbooks: {_id: lookbookId}
+ //  }
+	// }, function(err, data){
+	// 	if (err) {console.log(err)}
+	// 		res.json( data )
+	// });
+})
+
 router.get('/lookbooks/:id', function(req, res) {
 	const lookbookId = req.params.id
 	console.log('FETCHING LOOKBOOK ID:', lookbookId)
@@ -87,7 +139,6 @@ router.post('/signup', passport.authenticate('local-signup', {
 });
 
 router.get('/currentuser', passport.authenticate('jwt', { session: false}), function(req, res) {
-	console.log('HIT CURRENT USER ROUTE', req.user)
   res.json({id: req.user._id, username: req.user.local.username, lookbooks: req.user.local.lookbooks})
 })
 

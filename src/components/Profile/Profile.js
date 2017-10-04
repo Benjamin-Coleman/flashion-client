@@ -15,6 +15,9 @@ class Profile extends Component {
     if (this.loggedIn()) {
       this.props.getUserData(localStorage.getItem('jwt'))
 	    }
+      else {
+        
+      }
      const els = document.querySelectorAll('.lookbook-preview')
      TweenMax.staggerFromTo(els, 1, {opacity: 0, y: -20}, {opacity: 1, y:0}, .2)
     }
@@ -23,7 +26,7 @@ class Profile extends Component {
   // }
 
 	render() {
-    const renderLookbookPreviews = this.props.auth.user.lookbooks.map((x, index) => <LookbookPreview key={index} brandName={x.brandName} collectionName={x.collectionName} templateThumbnail={`/assets/img/template_preview_${x.template}`} lookbookId={x._id}/> )
+    const renderLookbookPreviews = this.props.auth.user.lookbooks.map((x, index) => <LookbookPreview key={index} firstImage={x.products[0].imageURL} brandName={x.brandName} collectionName={x.collectionName} templateThumbnail={`/assets/img/template_preview_${x.template}`} lookbookId={x._id}/> )
     console.log(this.props)
 		return (
       <div>

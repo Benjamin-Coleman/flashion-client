@@ -18,6 +18,8 @@ saveResponse: false }, action) {
 		case "FETCH_LOOKBOOK":
 			console.log('fetching lb', action.payload)
 			return Object.assign({}, state, {data: action.payload.data})
+		case "LOOKBOOK_DELETED":
+			return Object.assign({}, state, {data: action.payload.data})
 		case "UPDATE_PRODUCT_OPACITY":
 			return Object.assign({}, state, {data: {
 				...state.data,
