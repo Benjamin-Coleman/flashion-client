@@ -66,17 +66,6 @@ export function saveEditedLookbook(data, history) {
 	}
 }
 
-export function deleteLookbook(lookbookId, userId){
-	return function(dispatch) {
-		const url = `http://localhost:3000/api/lookbooks/${lookbookId}/delete`
-		axios.post(url, {userId: userId})
-			.then( res => {
-				console.log('DELETE LB RES', res);
-				dispatch({ type: "LOOKBOOK_DELETED", payload: res})
-			})
-	}
-}
-
 export function updateProductOpacity(data) {
 	return { type: "UPDATE_PRODUCT_OPACITY", payload: data}
 }

@@ -18,8 +18,6 @@ saveResponse: false }, action) {
 		case "FETCH_LOOKBOOK":
 			console.log('fetching lb', action.payload)
 			return Object.assign({}, state, {data: action.payload.data})
-		case "LOOKBOOK_DELETED":
-			return Object.assign({}, state, {data: action.payload.data})
 		case "UPDATE_PRODUCT_OPACITY":
 			return Object.assign({}, state, {data: {
 				...state.data,
@@ -109,7 +107,6 @@ saveResponse: false }, action) {
 			}
 
 			const updatedInfoPositionProducts = updateProducts(state.data.lookbook.products, action.index, action.posX, action.posY)
-			console.log("** UPDATED POSITIONS", updatedInfoPositionProducts)
 			return Object.assign({}, state, {data: {
 				...state.data,
 				lookbook: {

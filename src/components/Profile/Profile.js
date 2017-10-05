@@ -3,9 +3,14 @@ import { connect } from 'react-redux'
 import { getUserData } from '../../actions/auth'
 import LookbookPreview from '../Lookbook/LookbookPreview'
 import { TweenMax } from 'gsap'
+
 import './Profile.css'
 
 class Profile extends Component {
+
+  state = {
+    deletedUpdate: false
+  }
 
   loggedIn = () => {
     return !!localStorage.getItem("jwt")
@@ -22,11 +27,8 @@ class Profile extends Component {
      TweenMax.staggerFromTo(els, 1, {opacity: 0, y: -20}, {opacity: 1, y:0}, .2)
     }
 
-  // componentDidMount = () => {
-  // }
-
 	render() {
-    const renderLookbookPreviews = this.props.auth.user.lookbooks.map((x, index) => <LookbookPreview key={index} firstImage={x.products[0].imageURL} brandName={x.brandName} collectionName={x.collectionName} templateThumbnail={`/assets/img/template_preview_${x.template}`} lookbookId={x._id}/> )
+    const renderLookbookPreviews = this.props.auth.user.lookbooks.map((x, index) => <LookbookPreview key={x._id} firstImage={x.products[0].imageURL} brandName={x.brandName} collectionName={x.collectionName} templateThumbnail={`/assets/img/template_preview_${x.template}`} lookbookId={x._id}/> )
     console.log(this.props)
 		return (
       <div>
@@ -36,8 +38,8 @@ class Profile extends Component {
         </div>
         <div className="page-wrapper">
           <div className='page-wrapper templates'>
-            <div className='template-grid'>     
-              {renderLookbookPreviews}
+            <div className='template-grid'>  
+                {renderLookbookPreviews}
             </div>
           </div>
         </div>
@@ -49,7 +51,8 @@ class Profile extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.auth
+    auth: state.auth,
+    data: state.templates
   }
 }
 

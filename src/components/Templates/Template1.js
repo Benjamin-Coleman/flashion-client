@@ -46,6 +46,7 @@ class Template1 extends Component {
 	componentDidMount() {
 		if (this.props.match.params.id){
 			// const { lookbook } = this.props
+			console.log('template fetch is happening')
 			this.props.fetchLookbook(this.props.match.params.id)
 		}
 		if (this.props.match.url.includes('edit')){

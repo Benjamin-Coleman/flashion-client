@@ -112,6 +112,18 @@ export function signup(userData, history) {
 // 	}
 // }
 
+
+export function deleteLookbook(lookbookId, userId){
+	return function(dispatch) {
+		const url = `http://localhost:3000/api/lookbooks/${lookbookId}/delete`
+		axios.post(url, {userId: userId})
+			.then( res => {
+				console.log('DELETE LB RES', res);
+				dispatch({ type: "LOOKBOOK_DELETED", payload: res})
+			})
+	}
+}
+
 export function getUserData() {
 	return function(dispatch) {
 		fetch('http://localhost:3000/api/currentuser', {

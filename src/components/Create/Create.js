@@ -33,8 +33,8 @@ class Create extends Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault()
-		const sanitizedBrandName = this.state.userInput.brandName.split(' ').join('-').toLowerCase()
-		const sanitizedCollectionName = this.state.userInput.collectionName.split(' ').join('-').toLowerCase()
+		const sanitizedBrandName = this.state.userInput.brandName.split(' ').join('-').toLowerCase().replace(/\W/g, '')
+		const sanitizedCollectionName = this.state.userInput.collectionName.split(' ').join('-').toLowerCase().replace(/\W/g, '')
 		this.props.history.push(`/lookbooks/preview/${sanitizedBrandName}/${sanitizedCollectionName}`)
 		this.props.collectCreateData({
 			lookbook: {

@@ -71,13 +71,16 @@ router.post('/lookbooks/:id/delete', function(req, res) {
 	const lookbookId = req.params.id
 	console.log('USER', req.body.userId, 'LOOKBOOKID', lookbookId)
 
+
+	// delete LB 
+	// then delete reference in User
+	Lookbook.findByIdAndRemove(lookbookId).then(
 	User.findOne({ _id: req.body.userId}).then(function(record){
-		console.log(record)
-		console.log(record.local.lookbooks.id('59d4efacccb91e34cf1d0e2b'));
-		record.local.lookbooks.id('59d4efacccb91e34cf1d0e2b').remove()
+		record.local.lookbooks = record.local.lookbooks.filter((x, i) => x._id != lookbookId)
 		record.save()
-		res.json({success: 'yeeee'})
+		res.json({id: record.local._id, username: record.local.username, lookbooks: record.local.lookbooks})
 	})
+	)
 
 	// Lookbook.findByIdAndRemove(lookbookId).then(res.json({ removed: 'removed the lookbook with remove method'}))
 	// User.findOne({ _id: req.body.userId}).then(function(record){
@@ -111,10 +114,11 @@ router.post('/lookbooks/:id/delete', function(req, res) {
 	// 		console.log('removed********')
 	// 	})
 	// }).then(res.json({success: 'ajskdlfjadsf'}))
+
 	// User.findByIdAndUpdate(req.body.userId, {
- //  $pull: {
- //    lookbooks: {_id: lookbookId}
- //  }
+	 //  $pull: {
+	 //    lookbooks: {_id: lookbookId}
+	 //  }
 	// }, function(err, data){
 	// 	if (err) {console.log(err)}
 	// 		res.json( data )
