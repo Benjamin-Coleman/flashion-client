@@ -29,7 +29,6 @@ class Profile extends Component {
 
 	render() {
     const renderLookbookPreviews = this.props.auth.user.lookbooks.map((x, index) => <LookbookPreview key={x._id} firstImage={x.products[0].imageURL} brandName={x.brandName} collectionName={x.collectionName} templateThumbnail={`/assets/img/template_preview_${x.template}`} lookbookId={x._id}/> )
-    console.log(this.props)
 		return (
       <div>
         <div className="profile-header">

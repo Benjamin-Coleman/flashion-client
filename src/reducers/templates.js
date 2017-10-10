@@ -8,16 +8,20 @@ export default function reducer(state = {
 		_id: '',
 		styles: {},
 		}
-	}, 
+	},
+	loading: false
+	, 
 saveResponse: false }, action) {
 	switch (action.type) {
 		case "COLLECT_CREATE_DATA":
 			return Object.assign({}, state, {data: action.payload})
 		case "SAVE_CREATE_DATA":
 			return Object.assign({}, state, {saveResponse: action.payload})
+		case "FETCHING_LOOKBOOK":
+			return Object.assign({}, state, {loading: action.isLoading})
 		case "FETCH_LOOKBOOK":
-			console.log('fetching lb', action.payload)
-			return Object.assign({}, state, {data: action.payload.data})
+			console.log('fetched lb', action.payload)
+			return Object.assign({}, state, {data: action.payload.data, loading: action.isLoading})
 		case "UPDATE_PRODUCT_OPACITY":
 			return Object.assign({}, state, {data: {
 				...state.data,

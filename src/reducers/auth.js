@@ -31,7 +31,7 @@ export default function reducer(state =
 		case "GET_USER":
 			return Object.assign({}, state, {user: action.payload})	
 		case "LOOKBOOK_DELETED":
-			return Object.assign({}, state, {user: action.payload.data})
+			return Object.assign({}, state, {user: {...state.user, lookbooks: action.payload.data.lookbooks}})
 		default:
 			return state
 	}

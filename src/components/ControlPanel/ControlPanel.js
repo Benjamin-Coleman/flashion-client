@@ -4,12 +4,6 @@ import Template1Controls from './Template1Controls'
 import Template2Controls from './Template2Controls'
 
 import { connect } from 'react-redux'
-// import { bindActionCreators } from 'redux'
-// import { updateProductOpacity, updateProductColor, updateImageGrayscale, updateImageAppearDuration, updateInfoAppearDuration, updateFontFamily } from '../../actions/templates'
-// import ColorPicker from 'react-color-picker'
-// import Slider from 'rc-slider'
-// import 'react-color-picker/index.css'
-// import 'rc-slider/assets/index.css'
 import { TweenMax, Back, Power2 } from 'gsap'
 
 class ControlPanel extends Component {
@@ -45,8 +39,6 @@ class ControlPanel extends Component {
 	}
 
 	render() {
-
-		console.log('CONTROL PANEL STATE', this.state)
 		return (
 			<div className="control-panel" ref='controlPanel'>
 				<div onClick={this.handleSidebarClick}  className="sidebar-text"><h6>Control Panel</h6><h6>{this.state.open ? 'Close': 'Open'}</h6></div>
@@ -61,12 +53,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-	// updateProductOpacity: bindActionCreators(updateProductOpacity, dispatch),
-	// updateProductColor: bindActionCreators(updateProductColor, dispatch),
-	// updateImageGrayscale: bindActionCreators(updateImageGrayscale, dispatch),
-	// updateImageAppearDuration: bindActionCreators(updateImageAppearDuration, dispatch),
-	// updateInfoAppearDuration: bindActionCreators(updateInfoAppearDuration, dispatch),
-	// updateFontFamily: bindActionCreators(updateFontFamily, dispatch),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ControlPanel)

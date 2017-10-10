@@ -11,28 +11,29 @@ function fetchTemplate(templateId) {
 
 export function fetchLookbook(lookbookId){
 	return function(dispatch) {
+		dispatch({type: "FETCHING_LOOKBOOK", isLoading: true})
 		const url = `http://localhost:3000/api/lookbooks/${lookbookId}`
 		// const options = {
 		// 	header: { "Content-Type": "application/json", "Accept": "application/json"}
 		// }
-		axios.get(url)
-			.then((res) => dispatch({ type:"FETCH_LOOKBOOK", payload: res}))
+		return axios.get(url)
+			.then((res) => dispatch({ type:"FETCH_LOOKBOOK", payload: res, isLoading: false}))
 	}
 }
 
-export function fetchCustomizations(lookbookId){
-	return function(dispatch) {
-		const url = `http://localhost:3000/api/v1/customizations/${lookbookId}`
-		const options = {
-			header: { "Content-Type": "application/json", "Accept": "application/json"}
-		}
-		fetch(url, options)
-			.then((res) => res.json())
-			.then((json) => {
-				dispatch({ type:"FETCH_LOOKBOOK", payload: json})
-			})
-	}
-}
+// export function fetchCustomizations(lookbookId){
+// 	return function(dispatch) {
+// 		const url = `http://localhost:3000/api/v1/customizations/${lookbookId}`
+// 		const options = {
+// 			header: { "Content-Type": "application/json", "Accept": "application/json"}
+// 		}
+// 		fetch(url, options)
+// 			.then((res) => res.json())
+// 			.then((json) => {
+// 				dispatch({ type:"FETCH_LOOKBOOK", payload: json})
+// 			})
+// 	}
+// }
 
 export const collectCreateData = (data) => {
 	return {
@@ -49,7 +50,7 @@ export function saveCreateData(data, user_id, history) {
 			.then(res => {
 				console.log(res)
 				dispatch({ type: "SAVE_CREATE_DATA", payload: res})
-				history.push(`/lookbooks/${res.data._id}`)
+				history.push(`/lookbooks/${res.data._id}/edit`)
 			})
 	}
 }

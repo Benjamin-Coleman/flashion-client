@@ -1,3 +1,5 @@
+// currently not in use. kept in case of switch to AWS S3 for image storage
+
 import React from 'react'
 import { connect } from 'react-redux'
 import { setImageToUpload } from '../actions/image'

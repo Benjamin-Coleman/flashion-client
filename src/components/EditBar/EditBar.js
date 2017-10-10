@@ -37,7 +37,6 @@ class EditBar extends Component {
 	}
 
 	render() {
-		console.log('EDIT BAR', this.props)
 		return (
 			<div className="preview-bar">
 				<div className="preview-message"><h6>Editing Your Lookbook</h6></div>

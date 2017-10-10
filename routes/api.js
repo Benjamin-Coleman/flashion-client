@@ -29,7 +29,7 @@ router.post('/lookbooks/:id/edit', urlencodedParser, function(req, res) {
 			infoAppearDuration: req.body.lookbook.styles.infoAppearDuration,
 			fontFamily: req.body.lookbook.styles.fontFamily
 		}
-		doc.markModified('i dunno')
+		doc.markModified('mod')
 		doc.save(function(err, lb){
 			if (err) return err;
 			res.json({ weDidIt: 'fam'})
@@ -39,6 +39,7 @@ router.post('/lookbooks/:id/edit', urlencodedParser, function(req, res) {
 
 router.post('/lookbooks/new', urlencodedParser, function(req, res) {
 	// var lookbook = req.body.data
+	console.log('NEW LOOKBOOK: ', req.body.data, req.body.user)
 	var newLookbook = new Lookbook({
 		template: req.body.data.lookbook.template,
 		brandName: req.body.data.lookbook.brandName,
@@ -55,18 +56,9 @@ router.post('/lookbooks/new', urlencodedParser, function(req, res) {
 			
 		})
 	})
-	// newLookbook.save().then(function() {
-	// 	console.log('new lookbook saved...moving onto find')
-	// 	User.findOne({ _id: req.body.data.user}).then(function(record){
-	// 		record.local.lookbooks.push({newLookbook})
-	// 		record.save().then(function() {
-	// 			res.json({ record })
-	// 		}).catch(err=> console.log(err))
-	// 	})
-	// })
-
 })
 
+// change to RESTful (.delete to /lookbooks/:id)
 router.post('/lookbooks/:id/delete', function(req, res) {
 	const lookbookId = req.params.id
 	console.log('USER', req.body.userId, 'LOOKBOOKID', lookbookId)
@@ -114,15 +106,6 @@ router.post('/lookbooks/:id/delete', function(req, res) {
 	// 		console.log('removed********')
 	// 	})
 	// }).then(res.json({success: 'ajskdlfjadsf'}))
-
-	// User.findByIdAndUpdate(req.body.userId, {
-	 //  $pull: {
-	 //    lookbooks: {_id: lookbookId}
-	 //  }
-	// }, function(err, data){
-	// 	if (err) {console.log(err)}
-	// 		res.json( data )
-	// });
 })
 
 router.get('/lookbooks/:id', function(req, res) {
@@ -135,9 +118,8 @@ router.get('/lookbooks/:id', function(req, res) {
 })
 
 router.post('/signup', passport.authenticate('local-signup', {
-            failureFlash : true // allow flash messages
+            failureFlash : true
 }), function(req, res) {
-	console.log(req.user)
 	var token = jwt.sign({ user_id: req.user._id }, 'learnlovecode')
 	res.json({ success: 'Signed up', user: req.user, jwt: token})
 });
@@ -145,16 +127,6 @@ router.post('/signup', passport.authenticate('local-signup', {
 router.get('/currentuser', passport.authenticate('jwt', { session: false}), function(req, res) {
   res.json({id: req.user._id, username: req.user.local.username, lookbooks: req.user.local.lookbooks})
 })
-
-//working login
-
-// router.post('/login', passport.authenticate('local-login', { failureFlash: true }), function(req, res, next) {
-//   console.log(req.user)
-//   var token = jwt.sign({ user_id: req.user._id }, 'learnlovecode')
-//   res.json({success:true, user: req.user._id, jwt: token})
-// });
-
-// login with error handling
 
 router.post('/login', function(req, res, next) {
   passport.authenticate('local-login', function(err, user, info) {

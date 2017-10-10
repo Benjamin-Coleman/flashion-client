@@ -13,17 +13,11 @@ import { connect } from 'react-redux'
 class Template1 extends Component {
 
 	state = {
-		// ...this.props.data,
-		editDialogues: {
-			productInfoColor: false,
-			productInfoOpacity: false,
-		},
-		customizations: {
-		},
 		styles: {
 			opacity: 1,
 		},
 		editable: false,
+		loaded: false
 	}
 
 	onDrag = (color, c) => {
@@ -46,9 +40,12 @@ class Template1 extends Component {
 	componentDidMount() {
 		if (this.props.match.params.id){
 			// const { lookbook } = this.props
-			console.log('template fetch is happening')
-			this.props.fetchLookbook(this.props.match.params.id)
+			// this.props.fetchLookbook(this.props.match.params.id).then(this.setState({ loaded: true}, () => TweenMax.to(this.refs.curtain, 1.3, {autoAlpha: 0, ease: Power2.easeOut})))
 		}
+		// preview step removed for now
+		// if (this.props.match.url.includes('preview')){
+		// 	TweenMax.to(this.refs.curtain, 1.3, {autoAlpha: 0, ease: Power2.easeOut})
+		// }
 		if (this.props.match.url.includes('edit')){
 			// check if the correct user
 		this.setState({ editable: true}, 
@@ -94,8 +91,6 @@ class Template1 extends Component {
 
 	render() {
 		console.log('Template 1 Props: ', this.props)
-		console.log('Template 1 State: ', this.state)
-
 		const products = this.props.data.lookbook.products.map((product, index) => (
 				<div className={index % 2 === 0 ? "template-1-product-row even" : "template-1-product-row"} key={index} >
 					<Draggable bounds='parent' disabled={!this.state.editable} onDrag={this.handleProductImageDrag} position={{x: product.imagePositionX, y: 0}} axis='x' >
@@ -138,7 +133,6 @@ const mapDispatchToProps = dispatch => ({
 	updateProductColor: bindActionCreators(updateProductColor, dispatch),
 	updateProductImagePosition: bindActionCreators(updateProductImagePosition, dispatch),
 	updateProductInfoPosition: bindActionCreators(updateProductInfoPosition, dispatch)
-	// fetchCustomizations: bindActionCreators(fetchCustomizations, dispatch)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Template1)

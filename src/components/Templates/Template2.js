@@ -17,9 +17,6 @@ class Template2 extends Component {
 	}
 
 	componentDidMount() {
-		if (this.props.match.params.id){
-			this.props.fetchLookbook(this.props.match.params.id)
-		}
 		if (this.props.match.url.includes('edit')){
 			this.setState({ editable: true})
 		}
@@ -49,7 +46,7 @@ class Template2 extends Component {
 	} 
 
 	handleNext = () => {
-		const currentIndex = (this.state.currentIndex < this.props.data.lookbook - 1 ) ? this.state.currentIndex + 1 : 0;
+		const currentIndex = (this.state.currentIndex < this.props.data.lookbook.products.length - 1 ) ? this.state.currentIndex + 1 : 0;
 		this.setState({ currentIndex: currentIndex })
 	}
 

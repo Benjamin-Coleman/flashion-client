@@ -44,7 +44,6 @@ class PreviewBar extends Component {
 	}
 
 	render() {
-		console.log(this.props)
 		return (
 			<div className="preview-bar">
 				<div className="preview-message"><h6>Previewing Your Lookbook</h6></div>

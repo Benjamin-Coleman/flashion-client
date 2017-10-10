@@ -20,7 +20,6 @@ import AccessDenied from './components/AccessDenied/AccessDenied'
 
 import { getUserData } from './actions/auth'
 import { screenResize } from './actions'
-// import { AnimatedWrapper, TestComponent } from './AnimatedWrapper'
 
 
 class App extends Component {
@@ -37,7 +36,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div className="App">
         <Route path='/' component={ NavBar } />

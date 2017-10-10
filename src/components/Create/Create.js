@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { collectCreateData } from '../../actions/templates'
+import { saveCreateData, collectCreateData } from '../../actions/templates'
 import { setImageToUpload } from '../../actions/image'
 import Dropzone from 'react-dropzone'
 import axios from 'axios'
@@ -31,20 +31,35 @@ class Create extends Component {
 		}
 	}
 
-	handleSubmit = (e) => {
+	// handleSubmit = (e) => {
+	// 	e.preventDefault()
+	// 	const sanitizedBrandName = this.state.userInput.brandName.split(' ').join('-').toLowerCase().replace(/\W/g, '')
+	// 	const sanitizedCollectionName = this.state.userInput.collectionName.split(' ').join('-').toLowerCase().replace(/\W/g, '')
+	// 	this.props.history.push(`/lookbooks/preview/${sanitizedBrandName}/${sanitizedCollectionName}`)
+	// 	this.props.collectCreateData({
+	// 		lookbook: {
+	// 			brandName: this.state.userInput.brandName,
+	// 			collectionName: this.state.userInput.collectionName,
+	// 			products: this.state.userInput.products,
+	// 			template: this.state.templateId,
+	// 			styles: {}
+	// 		}
+	// 	})
+	// }
+
+	handleSubmit = e => {
 		e.preventDefault()
-		const sanitizedBrandName = this.state.userInput.brandName.split(' ').join('-').toLowerCase().replace(/\W/g, '')
-		const sanitizedCollectionName = this.state.userInput.collectionName.split(' ').join('-').toLowerCase().replace(/\W/g, '')
-		this.props.history.push(`/lookbooks/preview/${sanitizedBrandName}/${sanitizedCollectionName}`)
-		this.props.collectCreateData({
-			lookbook: {
-				brandName: this.state.userInput.brandName,
-				collectionName: this.state.userInput.collectionName,
-				products: this.state.userInput.products,
-				template: this.state.templateId,
-				styles: {}
+		this.props.saveCreateData({
+			data: {
+				lookbook: {
+					brandName: this.state.userInput.brandName,
+					collectionName: this.state.userInput.collectionName,
+					products: this.state.userInput.products,
+					template: this.state.templateId,
+					styles: {}
+				}
 			}
-		})
+		}, this.props.auth.user.id, this.props.history)
 	}
 
 	handleProductNameChange = (idx) => (e) => {
@@ -274,11 +289,14 @@ updateImageState = (idx, data) => {
 }
 
 const mapStateToProps = state => ({
-	dataFromStore: state.templates.userInput
+	data: state.templates,
+	// dataFromStore: state.templates.userInput,
+	auth: state.auth
 })
 
 const mapDispatchToProps = dispatch => ({
 	collectCreateData: bindActionCreators(collectCreateData, dispatch),
+	saveCreateData: bindActionCreators(saveCreateData, dispatch),
 	setImageToUpload: bindActionCreators(setImageToUpload, dispatch),
 })
 
