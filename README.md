@@ -1,7 +1,43 @@
 # Flashion
-Create your own lookbook using your images/descriptions/photos/product links.
+Create your own lookbook using your images/descriptions/photos/product links. For small fashion brands to get the word out about their new collection.
 
-User Stories: 
+------
+
+## Get Started - Build Setup
+##### Install dependancies :
+```shell
+  npm i
+```
+
+##### Launch the node backend :
+```shell
+  npm node-start
+```
+
+The API will be launched at http://localhost:3000/
+
+##### Launch the node backend :
+```shell
+  npm react-start
+```
+
+The React App will ask if you want to run on another port, say yes. Project will be launched at http://localhost:3001/
+
+## Sandbox Account :
+```
+  USERNAME: sandbox
+  PASSWORD: flashion
+```
+Please don't delete the 2 demo templates. Feel free to make more or edit the demos though.
+
+
+#### TO DO :
+* Make responsive for mobile
+* More templates
+* More UI clarity on finalize lookbook links
+* Server side validations for new users
+
+#### User Stories : 
 
 As a user I want to:
 

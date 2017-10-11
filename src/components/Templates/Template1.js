@@ -54,8 +54,8 @@ class Template1 extends Component {
 				draggableNotificationTL
 					.to(this.refs.draggableNotification, 1, {opacity: 1, y: 0, ease: Power2.easeOut}, 0)
 					.to(this.refs.draggableNotification, 1, {opacity: 0, y: -30, ease: Power2.easeOut}, 5)
-			}
-		)
+				}
+			)
 		}
 
 		//setup
@@ -91,13 +91,28 @@ class Template1 extends Component {
 
 	render() {
 		console.log('Template 1 Props: ', this.props)
+
+		const productInfoStyles = {
+			backgroundColor: this.props.data.lookbook.styles.color1, 
+			opacity: this.props.data.lookbook.styles.opacity || this.props.data.lookbook.styles.opacity === 0 ? this.props.data.lookbook.styles.opacity / 100 : 1, 
+			cursor: this.state.editable ? '-webkit-grab' : 'auto'
+		}
+
+		const productImageStyles = { 
+			filter: `grayscale(${this.props.data.lookbook.styles.imageGrayscale / 100})`, 
+			cursor: this.state.editable ? '-webkit-grab' : 'auto' 
+		}
+
 		const products = this.props.data.lookbook.products.map((product, index) => (
 				<div className={index % 2 === 0 ? "template-1-product-row even" : "template-1-product-row"} key={index} >
 					<Draggable bounds='parent' disabled={!this.state.editable} onDrag={this.handleProductImageDrag} position={{x: product.imagePositionX, y: 0}} axis='x' >
-					<div className="product-img-wrap"><div className="image-cover"></div><img data-product-index={index} draggable="false" style={{ filter: `grayscale(${this.props.data.lookbook.styles.imageGrayscale / 100})`, cursor: this.state.editable ? '-webkit-grab' : 'auto' }} className={`product-image product-${index+1}`} src={product.imageURL} alt={product.name}/></div>
+						<div className="product-img-wrap">
+							<div className="image-cover"></div>
+							<img data-product-index={index} draggable="false" style={productImageStyles} className={`product-image product-${index+1}`} src={product.imageURL} alt={product.name}/>
+						</div>
 					</Draggable>
 					<Draggable bounds='parent' disabled={!this.state.editable} onDrag={this.handleProductInfoDrag} position={{x: product.infoPositionX, y: product.infoPositionY}}>
-					<div data-product-index={index} className={index % 2 === 0 ? "template-1-product-info even" : "template-1-product-info"} style={{backgroundColor: this.props.data.lookbook.styles.color1, opacity: this.props.data.lookbook.styles.opacity || this.props.data.lookbook.styles.opacity === 0 ? this.props.data.lookbook.styles.opacity / 100 : 1, cursor: this.state.editable ? '-webkit-grab' : 'auto'}}>
+					<div data-product-index={index} className={index % 2 === 0 ? "template-1-product-info even" : "template-1-product-info"} style={productInfoStyles}>
 						<h3>{product.name}</h3>
 						<p>{product.description}</p>
 						{product.URL !== '' ? <a href={product.URL} className="primary-button template-1"><span>View On Site</span></a> : null}

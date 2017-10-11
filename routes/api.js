@@ -27,12 +27,14 @@ router.post('/lookbooks/:id/edit', urlencodedParser, function(req, res) {
 			imageGrayscale: req.body.lookbook.styles.imageGrayscale,
 			imageAppearDuration: req.body.lookbook.styles.imageAppearDuration,
 			infoAppearDuration: req.body.lookbook.styles.infoAppearDuration,
-			fontFamily: req.body.lookbook.styles.fontFamily
+			fontFamily: req.body.lookbook.styles.fontFamily,
+			headerPositionX: req.body.lookbook.styles.headerPositionX,
+			headerPositionY: req.body.lookbook.styles.headerPositionY
 		}
 		doc.markModified('mod')
 		doc.save(function(err, lb){
 			if (err) return err;
-			res.json({ weDidIt: 'fam'})
+			res.json({ message: 'successfully edited'})
 		})
 	})
 })
@@ -58,16 +60,15 @@ router.post('/lookbooks/new', urlencodedParser, function(req, res) {
 	})
 })
 
-// change to RESTful (.delete to /lookbooks/:id)
-router.post('/lookbooks/:id/delete', function(req, res) {
+router.delete('/lookbooks/:id', function(req, res) {
 	const lookbookId = req.params.id
-	console.log('USER', req.body.userId, 'LOOKBOOKID', lookbookId)
+	console.log('USER', req.query.userId, 'LOOKBOOKID', lookbookId)
 
 
 	// delete LB 
 	// then delete reference in User
 	Lookbook.findByIdAndRemove(lookbookId).then(
-	User.findOne({ _id: req.body.userId}).then(function(record){
+	User.findOne({ _id: req.query.userId}).then(function(record){
 		record.local.lookbooks = record.local.lookbooks.filter((x, i) => x._id != lookbookId)
 		record.save()
 		res.json({id: record.local._id, username: record.local.username, lookbooks: record.local.lookbooks})

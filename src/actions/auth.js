@@ -3,29 +3,15 @@ import axios from 'axios'
 export function login(userData, history) {
 	return function (dispatch) {
 		const url = 'http://localhost:3000/api/login'
-		const body = JSON.stringify(userData)
-		const headers = {
-			method: 'post',
-			body: body,
-			headers: {
-				"Content-Type":"application/json",
-				"Accept":"application/json"
-			}
-		}
-
-		// fetch(url, headers)
-		// 	.then((res) => res.json())
-		// 	.then((json) => {
-		// 		if (json.jwt) {
-		// 			dispatch({type: "LOGIN", payload: json})
-		// 			history.push('/', json.success)
-		// 		}
-
-		// 		else {
-		// 			dispatch({type: "FAILED_LOGIN", payload: json.message})
-		// 			history.push('/login')
-		// 		}
-		// 	})
+		// const body = JSON.stringify(userData)
+		// const headers = {
+		// 	method: 'post',
+		// 	body: body,
+		// 	headers: {
+		// 		"Content-Type":"application/json",
+		// 		"Accept":"application/json"
+		// 	}
+		// }
 		axios.post('http://localhost:3000/api/login', userData)
 			.then(res => {if (res.data.success) {
 					dispatch({type: "LOGIN", payload: res.data})
@@ -44,23 +30,16 @@ export function signup(userData, history) {
 	return function(dispatch) {
 		const url = 'http://localhost:3000/api/signup'
 
-		const body = JSON.stringify(userData)
+		// const body = JSON.stringify(userData)
 
-		const headers = {
-			method: 'POST',
-			body: body,
-			headers: {
+		// const headers = {
+		// 	method: 'POST',
+		// 	body: body,
+		// 	headers: {
 				
-				"Accept":"application/json"
-			}
-		}
-
-		// fetch(url, headers)
-		// 	.then((res) => res.json())
-		// 	.then((json) => {
-		// 		dispatch({type: "LOGIN", payload: json})
-		// 		history.push('/', json.success)
-		// 	})
+		// 		"Accept":"application/json"
+		// 	}
+		// }
 		axios.post(url, userData)
 			.then(res => {
 				console.log(res.data)
@@ -70,53 +49,10 @@ export function signup(userData, history) {
 	}
 }
 
-// export function getUserData(jwt){
-//     return function(dispatch) {
-//       const url = 'http://localhost:3000/api/v1/currentuser'
-
-//       const headers = {
-//         method: 'get',
-//         headers: {
-//           "Authorization":`Bearer ${jwt}`,
-//           "Accept":"application/json"
-//         }
-//       }
-
-//       fetch(url, headers)
-//       .then(res => res.json())
-//       .then(json => {
-//         if (json.lookbooks) {
-//           dispatch({type: "GET_USER", payload: json})
-//         }
-//       })
-//     }
-// }
-
-// export function getUserData() {
-
-// 	var instance = axios.create({
-// 		// url: 'http://localhost:3000/api/currentuser',
-// 		auth: `Bearer ${localStorage.getItem("jwt")}`
-// 	})
-
-// 	return function(dispatch) {
-// 		const url = 'http://localhost:3000/api/currentuser'
-
-// 		// axios.get({url: url, auth: `Bearer ${localStorage.getItem("jwt")}`})
-// 		// 	.then(res => {
-// 		// 		dispatch({ type: "GET_USER", payload: res})
-// 		// 	})
-// 		instance.get(url).then(res => {
-// 				dispatch({ type: "GET_USER", payload: res})
-// 			})
-// 	}
-// }
-
-
 export function deleteLookbook(lookbookId, userId){
 	return function(dispatch) {
-		const url = `http://localhost:3000/api/lookbooks/${lookbookId}/delete`
-		axios.post(url, {userId: userId})
+		const url = `http://localhost:3000/api/lookbooks/${lookbookId}`
+		axios.delete(url, {params: {userId: userId}})
 			.then( res => {
 				console.log('DELETE LB RES', res);
 				dispatch({ type: "LOOKBOOK_DELETED", payload: res})

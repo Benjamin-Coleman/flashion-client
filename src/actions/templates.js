@@ -106,3 +106,9 @@ export function updateProductImagePosition(e, data) {
 	return { type: "UPDATE_PRODUCT_IMAGE_POSITION", index: index, pos: pos}
 }
 
+export function updateHeaderPosition(e, data) {
+	console.log('HEADER DRAG DATA: ', data)
+	const posX = data.lastX
+	const posY = data.lastY
+	return { type: "UPDATE_HEADER_POSITION", posX: posX, posY: posY}
+}

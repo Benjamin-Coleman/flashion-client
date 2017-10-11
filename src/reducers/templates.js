@@ -143,6 +143,20 @@ saveResponse: false }, action) {
 					}
 				}
 			})
+			case "UPDATE_HEADER_POSITION":
+			console.log('this happening?')
+			return Object.assign({}, state, {data: {
+				...state.data,
+				lookbook: {
+					...state.data.lookbook,
+				 styles: {
+				 	...state.data.lookbook.styles,
+				 	headerPositionX: action.posX,
+				 	headerPositionY: action.posY
+					 }
+					}
+				}
+			})
 		default:
 			return state
 	}
