@@ -3,7 +3,7 @@ import axios from 'axios'
 function fetchTemplate(templateId) {
 
 	return function(dispatch) {
-		fetch(`localhost:3000/${templateId}`)
+		fetch(`/${templateId}`)
 			.then(res => res.json())
 			.then(json => dispatch({ type: "FETCH_TEMPLATE", payload: json}))
 	}
@@ -12,7 +12,7 @@ function fetchTemplate(templateId) {
 export function fetchLookbook(lookbookId){
 	return function(dispatch) {
 		dispatch({type: "FETCHING_LOOKBOOK", isLoading: true})
-		const url = `http://localhost:3000/api/lookbooks/${lookbookId}`
+		const url = `/api/lookbooks/${lookbookId}`
 		// const options = {
 		// 	header: { "Content-Type": "application/json", "Accept": "application/json"}
 		// }
@@ -23,7 +23,7 @@ export function fetchLookbook(lookbookId){
 
 // export function fetchCustomizations(lookbookId){
 // 	return function(dispatch) {
-// 		const url = `http://localhost:3000/api/v1/customizations/${lookbookId}`
+// 		const url = `/api/v1/customizations/${lookbookId}`
 // 		const options = {
 // 			header: { "Content-Type": "application/json", "Accept": "application/json"}
 // 		}
@@ -45,7 +45,7 @@ export const collectCreateData = (data) => {
 export function saveCreateData(data, user_id, history) {
 	console.log(data, user_id)
 	return function(dispatch) {
-		const url = `http://localhost:3000/api/lookbooks/new`
+		const url = `/api/lookbooks/new`
 		axios.post(url, {...data, user: user_id})
 			.then(res => {
 				console.log(res)
@@ -58,7 +58,7 @@ export function saveCreateData(data, user_id, history) {
 export function saveEditedLookbook(data, history) {
 	console.log(data, data.lookbookId)
 	return function(dispatch) {
-		const url = `http://localhost:3000/api/lookbooks/${data.lookbook._id}/edit`
+		const url = `/api/lookbooks/${data.lookbook._id}/edit`
 		axios.post(url, {...data})
 			.then(res => {
 				console.log(res)

@@ -1,8 +1,6 @@
 # Flashion
 Create your own lookbook using your images/descriptions/photos/product links. For small fashion brands to get the word out about their new collection.
 
-------
-
 ## Get Started - Build Setup
 ##### Install dependancies :
 ```shell
@@ -16,7 +14,7 @@ Create your own lookbook using your images/descriptions/photos/product links. Fo
 
 The API will be launched at http://localhost:3000/
 
-##### Launch the node backend :
+##### Launch the React frontend :
 ```shell
   npm react-start
 ```

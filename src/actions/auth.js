@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export function login(userData, history) {
 	return function (dispatch) {
-		const url = 'http://localhost:3000/api/login'
+		const url = '/api/login'
 		// const body = JSON.stringify(userData)
 		// const headers = {
 		// 	method: 'post',
@@ -12,7 +12,7 @@ export function login(userData, history) {
 		// 		"Accept":"application/json"
 		// 	}
 		// }
-		axios.post('http://localhost:3000/api/login', userData)
+		axios.post('/api/login', userData)
 			.then(res => {if (res.data.success) {
 					dispatch({type: "LOGIN", payload: res.data})
 					history.push('/', res.statusText)
@@ -28,7 +28,7 @@ export function login(userData, history) {
 export function signup(userData, history) {
 
 	return function(dispatch) {
-		const url = 'http://localhost:3000/api/signup'
+		const url = '/api/signup'
 
 		// const body = JSON.stringify(userData)
 
@@ -51,7 +51,7 @@ export function signup(userData, history) {
 
 export function deleteLookbook(lookbookId, userId){
 	return function(dispatch) {
-		const url = `http://localhost:3000/api/lookbooks/${lookbookId}`
+		const url = `/api/lookbooks/${lookbookId}`
 		axios.delete(url, {params: {userId: userId}})
 			.then( res => {
 				console.log('DELETE LB RES', res);
@@ -62,7 +62,7 @@ export function deleteLookbook(lookbookId, userId){
 
 export function getUserData() {
 	return function(dispatch) {
-		fetch('http://localhost:3000/api/currentuser', {
+		fetch('/api/currentuser', {
 			method: 'GET',
 			headers: {
 		        'Content-Type': 'application/json',
