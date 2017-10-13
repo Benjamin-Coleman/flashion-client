@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "react-scripts build && node app.js",
+    "start": "node app.js",
     "node-start": "nodemon ./bin/www",
     "react-start": "react-scripts start ",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postinstall": "react-scripts build"
   },
   "proxy": "http://localhost:3000",
   "dependencies": {
