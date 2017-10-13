@@ -4,12 +4,14 @@
   "private": true,
   "scripts": {
     "start": "react-scripts build && node ./bin/www",
-    "heroku-postbuild": "cd client && npm install && npm run build",
     "node-start": "nodemon ./bin/www",
     "react-start": "react-scripts start ",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "engines": {
+    "node": "6.11.0"
   },
   "proxy": "http://localhost:3000",
   "dependencies": {
