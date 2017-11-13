@@ -9,3 +9,9 @@
     align-items: center;
     justify-content: center;
 }
+
+@media only screen and (max-width: 750px){
+	.template-preview {
+		width: 100%;
+	}
+}

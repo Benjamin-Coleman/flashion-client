@@ -4,7 +4,6 @@
 	padding: 30px;
 	margin-top: 30px;
 	display: flex;
-
 }
 
 .hero-image {
@@ -47,4 +46,13 @@
 	font-weight: 200;
 	line-height: 2;
 	font-size: 1em;
+}
+
+@media only screen and (max-width: 900px) {
+	.hero-image {
+		display: none;
+	}
+	.hero-content {
+		width: 100%;
+	}
 }

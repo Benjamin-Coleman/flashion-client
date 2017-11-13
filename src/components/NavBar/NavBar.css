@@ -25,3 +25,18 @@
 	letter-spacing: 2px;
 	font-weight: 700;
 }
+
+@media only screen and (max-width: 500px) {
+	.nav-links {
+	    display: flex;
+	    flex-wrap: wrap;
+	}
+	.nav-links a {
+		width: 100%;
+	    text-align: center;
+   }
+   .navbar {
+   		height: auto;
+   		flex-wrap: wrap;
+   }
+}	 
