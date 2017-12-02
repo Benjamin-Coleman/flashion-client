@@ -9,14 +9,19 @@ Create your own lookbook using your images/descriptions/photos/product links. Fo
 
 ##### Launch the node backend :
 ```shell
-  npm node-start
+  npm run node-start
 ```
 
 The API will be launched at http://localhost:3000/
 
+##### Build with webpack :
+```shell
+  npm run build
+```
+
 ##### Launch the React frontend :
 ```shell
-  npm react-start
+  npm run react-start
 ```
 
 The React App will ask if you want to run on another port, say yes. Project will be launched at http://localhost:3001/
