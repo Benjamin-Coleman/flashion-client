@@ -1,13 +1,13 @@
 import axios from 'axios'
 
-function fetchTemplate(templateId) {
+// function fetchTemplate(templateId) {
 
-	return function(dispatch) {
-		fetch(`localhost:3000/${templateId}`)
-			.then(res => res.json())
-			.then(json => dispatch({ type: "FETCH_TEMPLATE", payload: json}))
-	}
-}
+// 	return function(dispatch) {
+// 		fetch(`localhost:3000/${templateId}`)
+// 			.then(res => res.json())
+// 			.then(json => dispatch({ type: "FETCH_TEMPLATE", payload: json}))
+// 	}
+// }
 
 export function fetchLookbook(lookbookId){
 	return function(dispatch) {
